@@ -2,17 +2,24 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+// seeder
+const { seedCategory } = require("./seeder/categorySeeder");
+const { seedUser } = require("./seeder/userSeeder");
+const { seedTask } = require("./seeder/taskSeeder");
+const { seedNews } = require("./seeder/newsSeeder");
+
+// main
 async function main() {
-  // Menambahkan user dummy
-  await prisma.user.create({
-    data: {
-      name: "John Doe",
-      username: "johndoe",
-      email: "john.doe@example.com",
-      password: "hashedpassword", // Pastikan password di-hash
-      profile_picture: "profilepic.jpg",
-    },
-  });
+  // Hapus Data
+  // await prisma.category.deleteMany();
+  // await prisma.task.deleteMany();
+  // await prisma.user.deleteMany();
+  // await prisma.news.deleteMany();
+  // Seeder
+  // await seedCategory();
+  // await seedTask();
+  // await seedUser();
+  await seedNews();
 }
 
 main()

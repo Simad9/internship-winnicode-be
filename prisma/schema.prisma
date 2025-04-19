@@ -19,12 +19,13 @@ model User {
   username        String    @unique
   email           String    @unique
   password        String
+  role            Role      @default(public)
   profile_picture String?
   university      String?
   major           String?
   internship_date DateTime?
   created_at      DateTime  @default(now())
-  updated_at      DateTime  @updatedAt
+  updated_at      DateTime?  @updatedAt
   deleted_at      DateTime?
 
   // Relasi
@@ -39,7 +40,7 @@ model Task {
   task_title    String
   task_deadline DateTime
   created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
+  updated_at    DateTime?  @updatedAt
   deleted_at    DateTime?
 
   // Relasi
@@ -51,7 +52,7 @@ model Category {
   category    String
   status      Status_Category
   created_at  DateTime        @default(now())
-  updated_at  DateTime        @updatedAt
+  updated_at  DateTime?        @updatedAt
   deleted_at  DateTime?
 
   // Relasi
@@ -62,8 +63,8 @@ model News {
   id_news    Int       @id @default(autoincrement())
   task       Task      @relation(fields: [taskId], references: [id_task], onDelete: Cascade, onUpdate: Cascade)
   taskId     Int
-  category   Category  @relation(fields: [newsId], references: [id_category], onDelete: Cascade, onUpdate: Cascade)
-  newsId     Int
+  category   Category  @relation(fields: [categoryId], references: [id_category], onDelete: Cascade, onUpdate: Cascade)
+  categoryId Int
   pending    Pending?  @relation(fields: [pendingId], references: [id_pending], onDelete: Cascade, onUpdate: Cascade)
   pendingId  Int?
   author     User      @relation(fields: [authorId], references: [id_user], onDelete: Cascade, onUpdate: Cascade)
@@ -72,7 +73,7 @@ model News {
   content    String
   image      String
   created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
+  updated_at DateTime?  @updatedAt
   deleted_at DateTime?
 
   // Relasi

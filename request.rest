@@ -1,0 +1,35 @@
+# Kosong
+GET http://localhost:5000/
+Content-Type: application/json
+
+###
+# == Halaman Awal ==
+# 3 Berita Terbaru (✅ Sukses)
+GET http://localhost:5000/api/news-three-news
+Content-Type: application/json
+
+###
+# == Halaman Awal ==
+# 6 Berita Paling banyak Disukai (✅ Sukses)
+GET http://localhost:5000/api/news-most-liked
+Content-Type: application/json
+# Query untuk Endpoint ini
+# SELECT COUNT(newsId) AS like_count, news.id_news, news.title, news.image, news.created_at, user.name FROM `like` 
+# INNER JOIN news ON news.id_news = like.newsId
+# INNER JOIN user ON news.authorId = user.id_user
+# GROUP BY newsId
+# ORDER BY like_count DESC;
+
+###
+# == Halaman Awal ==
+# 9 Berita Home (✅ Sukses)
+GET http://localhost:5000/api/news
+Content-Type: application/json
+
+### 
+# == Halaman Lainnya (Pagination) ==
+# Pagination Berita 1 halaman 12 Berita
+GET http://localhost:5000/api/news?page:1
+Content-Type: application/json
+
+
