@@ -1,50 +1,22 @@
-# Kosong
-GET http://localhost:5000/
-Content-Type: application/json
-
-###
-# == Halaman Awal ==
-# 3 Berita Terbaru (✅ Sukses)
-GET http://localhost:5000/api/news-three-news
-Content-Type: application/json
-
-###
-# == Halaman Awal ==
-# 6 Berita Paling banyak Disukai (✅ Sukses)
-GET http://localhost:5000/api/news-most-liked
-Content-Type: application/json
-
-###
-# == Halaman Awal ==
-# 9 Berita Home (✅ Sukses)
-GET http://localhost:5000/api/news
-Content-Type: application/json
-
-### 
-# == Halaman Lainnya (Pagination) ==
-# Pagination Berita 1 halaman 12 Berita
-GET http://localhost:5000/api/news?page:1
-Content-Type: application/json
-
 ###
 # == Tidak ada Halaman == 👷‍♀️
-# Ambil Data
+# Ambil Data (✅ Sukses)
 GET http://localhost:5000/api/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJ1c2VybmFtZSI6IldpamRhbjEyMyIsImlhdCI6MTc0NTExMDg1MywiZXhwIjoxNzQ1MTEwODczfQ.GKBP8vnGTSEv517CUp1DHNzazIvDkD6EAJqsHaxbluk
 ###
 # == Tidak ada Halaman == 👷‍♀️
-# Refresh Token
+# Refresh Token (✅ Sukses)
 GET http://localhost:5000/api/token
 Content-Type: application/json
 ###
 # == Tidak ada Halaman == 👷‍♀️
-# Logout
+# Logout (✅ Sukses)
 DELETE http://localhost:5000/api/logout
 Content-Type: application/json
 
 ###
 # == Halaman Login ==
-# Login Akun
+# Login Akun (✅ Sukses)
 POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
@@ -55,7 +27,7 @@ Content-Type: application/json
 
 ###
 # == Halaman Register ==
-# Register Akun
+# Register Akun (✅ Sukses)
 POST http://localhost:5000/api/users/register
 Content-Type: application/json
 
@@ -66,4 +38,3 @@ Content-Type: application/json
   "password": "Wijdan123",
   "confirm_password": "Wijdan123"
 }
-

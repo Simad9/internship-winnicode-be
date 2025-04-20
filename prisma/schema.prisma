@@ -21,7 +21,7 @@ model User {
   password        String    @db.VarChar(255)
   role            Role      @default(public)
   profile_picture String?
-  refresh_token   String?    @db.Text
+  refresh_token   String?   @db.Text
   university      String?
   major           String?
   internship_date DateTime?
@@ -71,7 +71,7 @@ model News {
   author     User      @relation(fields: [authorId], references: [id_user], onDelete: Cascade, onUpdate: Cascade)
   authorId   Int
   title      String
-  content    String
+  content    String    @db.Text
   image      String
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt

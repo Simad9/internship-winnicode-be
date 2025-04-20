@@ -1,5 +1,6 @@
 const News = require("../models/newsModels");
 
+// HomePage - 3 berita terbaru
 const threeNewNews = async (req, res) => {
   try {
     const data = await News.threeNewNews();
@@ -12,6 +13,7 @@ const threeNewNews = async (req, res) => {
   }
 };
 
+// HomePage - 6 Berita paling disukai
 const mostLikedNews = async (req, res) => {
   try {
     const data = await News.mostLikedNews();
@@ -24,6 +26,7 @@ const mostLikedNews = async (req, res) => {
   }
 };
 
+// HomePage - 9 Berita
 const homeNews = async (req, res) => {
   try {
     const data = await News.homeNews();
@@ -36,6 +39,7 @@ const homeNews = async (req, res) => {
   }
 };
 
+// Berita Lainnya - 12 Berita, 1 halaman
 const pageNews = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const pageSize = 12;
@@ -62,9 +66,58 @@ const pageNews = async (req, res) => {
   }
 };
 
+// Detail Berita - Ambil Detail Berita
+const getNewsById = async (req, res) => {
+  const { newsId } = req.params;
+  try {
+    const data = await News.getNewsDetailById(newsId);
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
+// Detail berita - hitung like pada berita
+// TODO
+
+// Detail berita - hitung komentar pada berita
+// TODO
+
+// Detail Berita - Ambil Komentar
+const getNewsComments = async (req, res) => {
+  const { newsId } = req.params;
+  try {
+    const data = await News.getNewsComments(newsId);
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
+// Detail berita = menambahkan komentar (butuh login)
+// TODO
+
+// Anak Magang menulis = Berita yang ditulis dia
+// TODO
+
+// Anak Magang menulis = Detail Penulis berita
+// TODO
+
+// Mencari Berita = Berita dicari berdasarkan keyword
+// TODO
+
 module.exports = {
   threeNewNews,
   mostLikedNews,
   homeNews,
   pageNews,
+  getNewsById,
+  // asda
+  getNewsComments
 };

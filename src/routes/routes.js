@@ -29,4 +29,8 @@ router.get("/news", newsController.homeNews);
 // Page : Halaman Lainnya
 router.get("/news?page=:page", newsController.pageNews);
 
+// Page : Detail Berita
+router.get("/news/:id_news", newsController.getNewsById);
+router.get("/news/:id_news/comments", newsController.getNewsComments);
+
 module.exports = router;

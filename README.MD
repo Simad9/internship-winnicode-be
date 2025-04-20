@@ -6,3 +6,6 @@ INNER JOIN news ON news.id_news = like.newsId
 INNER JOIN user ON news.authorId = user.id_user
 GROUP BY newsId
 ORDER BY like_count DESC;
+
+### NOTE : 
+- Nanti rapikan untuk model dan controller, mau dibuat strict atau sesuai kebutuhan aja
