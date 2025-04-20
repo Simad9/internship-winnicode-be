@@ -1,10 +1,18 @@
 // src/app.js
 const express = require("express");
 const cors = require("cors");
+const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+
+// App Express
 const app = express();
+
+// Dotenv
+dotenv.config();
 
 // Middlewares
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 // Routes

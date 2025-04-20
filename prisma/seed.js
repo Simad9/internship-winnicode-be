@@ -7,6 +7,7 @@ const { seedCategory } = require("./seeder/categorySeeder");
 const { seedUser } = require("./seeder/userSeeder");
 const { seedTask } = require("./seeder/taskSeeder");
 const { seedNews } = require("./seeder/newsSeeder");
+const { seedLike } = require("./seeder/likeSeeder");
 
 // main
 async function main() {
@@ -15,11 +16,14 @@ async function main() {
   // await prisma.task.deleteMany();
   // await prisma.user.deleteMany();
   // await prisma.news.deleteMany();
+  // await prisma.like.deleteMany();
+
   // Seeder
   // await seedCategory();
   // await seedTask();
   // await seedUser();
-  await seedNews();
+  // await seedNews();
+  // await seedLike();
 }
 
 main()

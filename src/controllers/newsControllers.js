@@ -6,8 +6,8 @@ const threeNewNews = async (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({
-      message: error.message,
-      error: "Something went wrong",
+      message: "Terjadi Kesalahan",
+      error: error.message,
     });
   }
 };
@@ -18,8 +18,8 @@ const mostLikedNews = async (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({
-      message: error.message,
-      error: "Something went wrong",
+      message: "Terjadi Kesalahan",
+      error: error.message,
     });
   }
 };
@@ -30,8 +30,8 @@ const homeNews = async (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({
-      message: error.message,
-      error: "Something went wrong",
+      message: "Terjadi Kesalahan",
+      error: error.message,
     });
   }
 };
@@ -56,8 +56,8 @@ const pageNews = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: error.message,
-      error: "Something went wrong",
+      message: "Terjadi Kesalahan",
+      error: error.message,
     });
   }
 };

@@ -18,14 +18,15 @@ model User {
   name            String
   username        String    @unique
   email           String    @unique
-  password        String
+  password        String    @db.VarChar(255)
   role            Role      @default(public)
   profile_picture String?
+  refresh_token   String?    @db.Text
   university      String?
   major           String?
   internship_date DateTime?
   created_at      DateTime  @default(now())
-  updated_at      DateTime?  @updatedAt
+  updated_at      DateTime? @updatedAt
   deleted_at      DateTime?
 
   // Relasi
@@ -40,7 +41,7 @@ model Task {
   task_title    String
   task_deadline DateTime
   created_at    DateTime  @default(now())
-  updated_at    DateTime?  @updatedAt
+  updated_at    DateTime? @updatedAt
   deleted_at    DateTime?
 
   // Relasi
@@ -52,7 +53,7 @@ model Category {
   category    String
   status      Status_Category
   created_at  DateTime        @default(now())
-  updated_at  DateTime?        @updatedAt
+  updated_at  DateTime?       @updatedAt
   deleted_at  DateTime?
 
   // Relasi
@@ -73,7 +74,7 @@ model News {
   content    String
   image      String
   created_at DateTime  @default(now())
-  updated_at DateTime?  @updatedAt
+  updated_at DateTime? @updatedAt
   deleted_at DateTime?
 
   // Relasi
