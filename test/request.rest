@@ -1,5 +1,11 @@
+# API YANG JADI DISINI
+
 # Kosong
 GET http://localhost:5000/
 Content-Type: application/json
 
+###
+# == Homepage ==
+GET http://localhost:5000/api/news
+Content-Type: application/json
 

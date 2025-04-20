@@ -39,6 +39,30 @@ const homeNews = async (req, res) => {
   }
 };
 
+// Home Page - Gabungan
+const homepage = async (req, res) => {
+  try {
+    // Menjalankan 3 query secara paralel
+    const [newNews, likedNews, homeNewsData] = await Promise.all([
+      News.threeNewNews(),
+      News.mostLikedNews(),
+      News.homeNews(),
+    ]);
+
+    // Mengembalikan semua data dalam satu response
+    res.json({
+      newNews,
+      likedNews,
+      homeNews: homeNewsData,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
 // Berita Lainnya - 12 Berita, 1 halaman
 const pageNews = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -119,5 +143,7 @@ module.exports = {
   pageNews,
   getNewsById,
   // asda
-  getNewsComments
+  getNewsComments,
+  // gabungan
+  homepage,
 };

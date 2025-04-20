@@ -8,6 +8,7 @@ const { seedUser } = require("./seeder/userSeeder");
 const { seedTask } = require("./seeder/taskSeeder");
 const { seedNews } = require("./seeder/newsSeeder");
 const { seedLike } = require("./seeder/likeSeeder");
+const { commentSeeder } = require("./seeder/commentSeeder");
 
 // main
 async function main() {
@@ -24,6 +25,7 @@ async function main() {
   // await seedUser();
   // await seedNews();
   // await seedLike();
+  // await commentSeeder();
 }
 
 main()
