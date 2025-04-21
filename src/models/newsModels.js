@@ -117,6 +117,7 @@ const getNewsDetailById = async (id_news) => {
       id_news,
     },
     select: {
+      id_news: true,
       title: true,
       content: true,
       image: true,
@@ -226,7 +227,7 @@ const internNews = async (id_user) => {
 
 // Anak Magang menulis = Detail Penulis berita
 const internNewsAuthor = async (id_user) => {
-  const news = await prisma.news.findMany({
+  const data = await prisma.news.findFirst({
     where: {
       authorId: id_user,
     },
@@ -242,18 +243,31 @@ const internNewsAuthor = async (id_user) => {
       },
     },
   });
+  return data;
 };
 
 // Mencari Berita = Berita dicari berdasarkan keyword
 const searchNews = async (keyword, page, pagesSize) => {
   const news = await prisma.news.findMany({
+    skip: (page - 1) * pagesSize,
+    take: pagesSize,
     where: {
       title: {
         contains: keyword,
       },
     },
-    skip: (page - 1) * pagesSize,
-    take: pagesSize,
+    select: {
+      id_news: true,
+      title: true,
+      content: true,
+      image: true,
+      created_at: true,
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
     orderBy: {
       created_at: "desc",
     },
@@ -274,5 +288,5 @@ module.exports = {
   addCommentInNews,
   internNews,
   internNewsAuthor,
-  searchNews
+  searchNews,
 };

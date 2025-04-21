@@ -1,35 +1,11 @@
-###
-# == Halaman Awal ==
-# 3 Berita Terbaru (✅ Sukses)
-GET http://localhost:5000/api/news-three-news
-Content-Type: application/json
-
-###
-# == Halaman Awal ==
-# 6 Berita Paling banyak Disukai (✅ Sukses)
-GET http://localhost:5000/api/news-most-liked
-Content-Type: application/json
-
-###
-# == Halaman Awal ==
-# 9 Berita Home (✅ Sukses)
-GET http://localhost:5000/api/news
-Content-Type: application/json
-
 ### 
-# == Halaman Lainnya (Pagination) ==
-# Pagination Berita 1 halaman 12 Berita (✅ Sukses)
-GET http://localhost:5000/api/news?page:1
+# == Halaman Cari - Search ==
+GET http://localhost:5000/api/news/search?q=kampus
 Content-Type: application/json
 
 ###
-# == Halaman Detail berita ==
-# Berita dari id
-GET http://localhost:5000/api/news/1
+# == Halaman Magang ==
+GET http://localhost:5000/api/news/magang/2
 Content-Type: application/json
 
-###
-# == Halaman Detail berita ==
-# Komentar pada berita
-GET http://localhost:5000/api/news/1/comments
-Content-Type: application/json
+

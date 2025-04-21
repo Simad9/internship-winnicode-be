@@ -5,7 +5,19 @@ GET http://localhost:5000/
 Content-Type: application/json
 
 ###
-# == Homepage ==
+# == Halmaan Homepage ==
 GET http://localhost:5000/api/news
 Content-Type: application/json
+
+### 
+# == Halaman Lainnya - Pagination ==
+GET http://localhost:5000/api/news/page?page=2
+Content-Type: application/json
+
+###
+# == Halaman Detail berita ==
+GET http://localhost:5000/api/news/2
+Content-Type: application/json
+
+
 

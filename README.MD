@@ -1,11 +1,37 @@
 ### Catatan Saya
 
-Query untuk MostLikeNews
-SELECT COUNT(newsId) AS like_count, news.id_news, news.title, news.image, news.created_at, user.name FROM `like`
-INNER JOIN news ON news.id_news = like.newsId
-INNER JOIN user ON news.authorId = user.id_user
-GROUP BY newsId
-ORDER BY like_count DESC;
+### TODO :
 
-### NOTE : 
+- [ ] Bikin User Publik
+  - [ ] Ambil data diri
+  - [ ] update data diri
+  - [ ] Hitung berita disukai
+  - [ ] Hitung berita disimpan
+  - [ ] Ambil berita yang disukai
+  - [ ] Ambil berita yang disimpan
+  - [ ] Hapus berita yang disukai
+  - [ ] hapus berita yang disimpan
+- [ ] Bikin User Magang
+  - [ ] Ambil data diri
+  - [ ] update data diri
+  - [ ] Ambil tugas
+  - [ ] Ambil berita peding
+  - [ ] Ambil berita yang ditulis
+  - [ ] Nulis berita
+  - [ ] Edit berita yang ditulis
+  - [ ] Hapus berita yang ditulis
+- [ ] Bikin User Admin (Belakangan - Karena masih banyak yang belum jadi)
+  - [ ] Ambil data diri
+  - [ ] update data diri
+  - [ ] Hitung user yang role nya intern
+  - [ ] Hitung user seluruhnya
+  - [ ] Ambil berita yang pending
+  - [ ] Kategori yang decline ditampilkan buat jadi approve kalo di klik
+  - [ ] List User
+  - [ ] Hapus User
+  - [ ] Edit User
+  - [ ] Beri nilai bagi yang magang --> Next Update
+
+### NOTE :
+
 - Nanti rapikan untuk model dan controller, mau dibuat strict atau sesuai kebutuhan aja
