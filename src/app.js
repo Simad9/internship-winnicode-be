@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.send("Not Found Data");
+  res.send("404 - Halaman tidak ada");
 });
 
 module.exports = app;

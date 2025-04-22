@@ -3,14 +3,14 @@
 ### TODO :
 
 - [ ] Bikin User Publik
-  - [ ] Ambil data diri
-  - [ ] update data diri
-  - [ ] Hitung berita disukai
-  - [ ] Hitung berita disimpan
-  - [ ] Ambil berita yang disukai
-  - [ ] Ambil berita yang disimpan
-  - [ ] Hapus berita yang disukai
-  - [ ] hapus berita yang disimpan
+  - [x] Ambil data diri
+  - [x] update data diri
+  - [x] Hitung berita disukai
+  - [x] Hitung berita disimpan
+  - [x] Ambil berita yang disukai
+  - [x] Ambil berita yang disimpan
+  - [x] Hapus berita yang disukai
+  - [x] hapus berita yang disimpan
 - [ ] Bikin User Magang
   - [ ] Ambil data diri
   - [ ] update data diri
@@ -35,3 +35,6 @@
 ### NOTE :
 
 - Nanti rapikan untuk model dan controller, mau dibuat strict atau sesuai kebutuhan aja
+Untuk pengambilan ata pada sisi user kurang nya : 
+- Berita urutan desc, terus di dasboard mau berapa yang diquery,
+- Yang di halaman like sama save itu mau ada berapa + pagination di BE aja

@@ -36,11 +36,9 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-
+    
     // Cari user berdasarkan username atau email
     const data = await Auth.usernameOrEmailExists(username, email);
-
-    console.log(data);
 
     // Jika tidak ditemukan
     if (!data) {
@@ -71,7 +69,9 @@ const login = async (req, res) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
-    return res.json({ accessToken });
+    return res.json({
+      accessToken,
+    });
   } catch (error) {
     res.status(500).json({
       message: "Terjadi Kesalahan",

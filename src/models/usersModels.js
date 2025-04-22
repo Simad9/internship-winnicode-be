@@ -6,8 +6,6 @@ const getUsers = async () => {
   return users;
 };
 
-
-
 module.exports = {
   getUsers,
 };
