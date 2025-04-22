@@ -99,12 +99,10 @@ const internNews = async (req, res) => {
 // Mencari Berita = Berita dicari berdasarkan keyword
 const searchNews = async (req, res) => {
   const keyword = req.query.q || "";
-  console.log(req.query.q);
   const page = parseInt(req.query.page) || 1;
   const pageSize = 12;
   try {
     const data = await News.searchNews(keyword, page, pageSize);
-    console.log("data :>> ", data);
     const totalNews = await News.totalNews();
     const totalPages = Math.ceil(totalNews / pageSize);
 

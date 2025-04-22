@@ -1,7 +1,13 @@
 ###
 # == Halaman Dashboard User
-GET http://localhost:5000/api/intern/dashboard
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJ1c2VybmFtZSI6IldpamRhbjEyMyIsImlhdCI6MTc0NTM1MDQxNiwiZXhwIjoxNzQ1MzUwNDM2fQ.AueIjg-0PMX3GyozZhht-orefP_Np52vGJzthYxhcC0
+PUT http://localhost:5000/api/admin/review-news/22
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJlbWFpbCI6IkFkbWluMTIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ1MzU5NjAxLCJleHAiOjE3NDUzNTk2MjF9.CgdqN_T4K1-VRUbDrkq1JPPma3x1e8TGfaSiMw_9WpY
+
+{
+  "status": "approve",
+  "note": "Bagus pertahankan di tugas selanjutnya"
+}
 
 ###
 # Refresh Token 
@@ -14,8 +20,8 @@ POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
-  "username" : "Wijdan123",
-  "password" : "Wijdan123"
+  "username" : "Admin123",
+  "password" : "Admin123"
 }
 
 ###

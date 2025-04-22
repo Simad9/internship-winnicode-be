@@ -1,5 +1,4 @@
 const Intern = require("../models/userInternModels");
-const bcrypt = require("bcrypt");
 
 const dashboardIntern = async (req, res) => {
   try {
@@ -90,7 +89,6 @@ const updateNews = async (req, res) => {
 const deleteNews = async (req, res) => {
   try {
     const newsId = parseInt(req.params.id_news);
-    console.log(newsId);
 
     const data = await Intern.deleteNews(newsId);
     res.status(200).json({

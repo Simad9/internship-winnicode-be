@@ -20,7 +20,6 @@ const updateUser = async (req, res) => {
   try {
     const { name, username, email, password_lama, password_baru } = req.body;
     const userId = req.userId;
-    console.log(userId);
 
     const user = await User.getUserById(userId);
     if (!user) {
