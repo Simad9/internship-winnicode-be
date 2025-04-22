@@ -1,11 +1,7 @@
 ###
 # == Halaman Dashboard User
-DELETE http://localhost:5000/api/public/dashboard/like/22
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiVXNlcjEyMyIsImVtYWlsIjoiVXNlcjEyM0BnbWFpbC5jb20iLCJpYXQiOjE3NDUzMzY2NDcsImV4cCI6MTc0NTMzNjY2N30.J9HuXNgzPwLSwca63s0gH7MTAURxZMrLvkZFPwIHFfQ
-###
-# == Halaman Dashboard User
-GET http://localhost:5000/api/public/dashboard
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiVXNlcjEyMyIsImVtYWlsIjoiVXNlcjEyM0BnbWFpbC5jb20iLCJpYXQiOjE3NDUzMzY2NTgsImV4cCI6MTc0NTMzNjY3OH0.YXzLqJTy8gqfWp4_lW-GyCcmsRCiXHcrHJg6eXkTTDw
+GET http://localhost:5000/api/intern/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJ1c2VybmFtZSI6IldpamRhbjEyMyIsImlhdCI6MTc0NTM1MDQxNiwiZXhwIjoxNzQ1MzUwNDM2fQ.AueIjg-0PMX3GyozZhht-orefP_Np52vGJzthYxhcC0
 
 ###
 # Refresh Token 
@@ -18,19 +14,19 @@ POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
-  "username" : "User123",
-  "password" : "User123"
+  "username" : "Wijdan123",
+  "password" : "Wijdan123"
 }
 
 ###
-PUT http://localhost:5000/api/public/updateUserPublic
+PUT http://localhost:5000/api/intern/edit-account
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiVXNlcjEyMyIsImVtYWlsIjoiVXNlcjEyM0BnbWFpbC5jb20iLCJpYXQiOjE3NDUzMzQ2NTQsImV4cCI6MTc0NTMzNDY3NH0.e9camfLs-Mr0POT3cuzuiUZByYGkFxuO7dUaqySeeBM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJ1c2VybmFtZSI6IldpamRhbjEyMyIsImVtYWlsIjoiV2lqZGFuMTIzQGdtYWlsLmNvbSIsImlhdCI6MTc0NTM1MTEyNSwiZXhwIjoxNzQ1MzUxMTQ1fQ.lPoJ5lVOeFJaEE4V-ySFT_MoUz7ljGJ-DnKEr9E2F0M
 
 {
-  "name" : "User",
-  "username" : "User123",
-  "email" : "User123@gmail.com",
-  "password_lama": "User123",
-  "password_baru": "User321"
+  "name" : "Wijdan Akhmad",
+  "username" : "Wijdan123",
+  "email" : "Wijdan123@gmail.com",
+  "password_lama": "Wijdan12345",
+  "password_baru": "Wijdan123"
 }

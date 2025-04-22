@@ -36,7 +36,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    
+
     // Cari user berdasarkan username atau email
     const data = await Auth.usernameOrEmailExists(username, email);
 
@@ -71,6 +71,7 @@ const login = async (req, res) => {
     });
     return res.json({
       accessToken,
+      role: data.role,
     });
   } catch (error) {
     res.status(500).json({

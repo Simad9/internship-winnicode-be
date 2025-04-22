@@ -12,6 +12,7 @@ const getUserPublic = async (userId) => {
       username: true,
       email: true,
       password: true,
+      role: true,
     },
   });
   return result;
@@ -115,23 +116,12 @@ const deleteSaveNews = async (saveId) => {
   return result;
 };
 
-const updateUserPublic = async (userId, data) => {
-  const result = await prisma.user.update({
-    where: {
-      id_user: userId,
-    },
-    data: data,
-  });
-  return result;
-};
-
 module.exports = {
   getUserPublic,
   countLikeNews,
   countSaveNews,
   getLikeNews,
   getSaveNews,
-  updateUserPublic,
   deleteLikeNews,
   deleteSaveNews,
 };

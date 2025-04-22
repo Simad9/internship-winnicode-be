@@ -18,6 +18,7 @@ async function main() {
   // await prisma.user.deleteMany();
   // await prisma.news.deleteMany();
   // await prisma.like.deleteMany();
+  // await prisma.comment.deleteMany();
 
   // Seeder
   // await seedCategory();

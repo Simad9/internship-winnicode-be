@@ -49,11 +49,11 @@ CREATE TABLE `News` (
     `id_news` INTEGER NOT NULL AUTO_INCREMENT,
     `taskId` INTEGER NOT NULL,
     `categoryId` INTEGER NOT NULL,
-    `pendingId` INTEGER NULL,
     `authorId` INTEGER NOT NULL,
     `title` VARCHAR(191) NOT NULL,
     `content` TEXT NOT NULL,
     `image` VARCHAR(191) NOT NULL,
+    `status` ENUM('pending', 'approved', 'revised') NULL DEFAULT 'pending',
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL,
     `deleted_at` DATETIME(3) NULL,
@@ -97,6 +97,7 @@ CREATE TABLE `Comment` (
 -- CreateTable
 CREATE TABLE `Pending` (
     `id_pending` INTEGER NOT NULL AUTO_INCREMENT,
+    `newsId` INTEGER NOT NULL,
     `status` ENUM('pending', 'approved', 'revised') NOT NULL DEFAULT 'pending',
     `note` VARCHAR(191) NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -110,9 +111,6 @@ ALTER TABLE `News` ADD CONSTRAINT `News_taskId_fkey` FOREIGN KEY (`taskId`) REFE
 
 -- AddForeignKey
 ALTER TABLE `News` ADD CONSTRAINT `News_categoryId_fkey` FOREIGN KEY (`categoryId`) REFERENCES `Category`(`id_category`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `News` ADD CONSTRAINT `News_pendingId_fkey` FOREIGN KEY (`pendingId`) REFERENCES `Pending`(`id_pending`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `News` ADD CONSTRAINT `News_authorId_fkey` FOREIGN KEY (`authorId`) REFERENCES `User`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -134,3 +132,6 @@ ALTER TABLE `Comment` ADD CONSTRAINT `Comment_newsId_fkey` FOREIGN KEY (`newsId`
 
 -- AddForeignKey
 ALTER TABLE `Comment` ADD CONSTRAINT `Comment_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Pending` ADD CONSTRAINT `Pending_newsId_fkey` FOREIGN KEY (`newsId`) REFERENCES `News`(`id_news`) ON DELETE CASCADE ON UPDATE CASCADE;

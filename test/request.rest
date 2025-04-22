@@ -87,7 +87,7 @@ Authorization: token
 
 ###
 # == Halaman User - Edit Akun ==
-PUT http://localhost:5000/api/public/updateUserPublic
+PUT http://localhost:5000/api/public/edit-account
 Content-Type: application/json
 Authorization: token
 

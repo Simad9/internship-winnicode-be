@@ -6,9 +6,10 @@ const verifyToken = require("../middlewares/verifyToken");
 
 // Controllers
 const newsController = require("../controllers/newsControllers");
-const usersController = require("../controllers/usersControllers");
 const authController = require("../controllers/authControllers");
+const usersController = require("../controllers/usersControllers");
 const userPublikController = require("../controllers/userPublicControllers");
+const userInternController = require("../controllers/userInternControllers");
 
 // Routes
 // Page : Login
@@ -36,27 +37,46 @@ router.get(
   userPublikController.dashboardPublic
 );
 router.delete(
-  "/public/dashboard/like/:id",
+  "/public/dashboard/like/:id_like",
   verifyToken,
   userPublikController.deleteLikeNews
 );
 router.delete(
-  "/public/dashboard/save/:id",
+  "/public/dashboard/save/:id_save",
   verifyToken,
   userPublikController.deleteSaveNews
 );
 // Page : User - Dashboard
 router.get("/public/like", verifyToken, userPublikController.likeNews);
-router.delete("/public/like/:id", verifyToken, userPublikController.deleteLikeNews);
+router.delete(
+  "/public/like/:id_like",
+  verifyToken,
+  userPublikController.deleteLikeNews
+);
 // Page : User - Dashboard
 router.get("/public/save", verifyToken, userPublikController.saveNews);
-router.delete("/public/save/:id", verifyToken, userPublikController.deleteSaveNews);
-// Page : User - Dashboard
-router.put(
-  "/public/updateUserPublic",
+router.delete(
+  "/public/save/:id_save",
   verifyToken,
-  userPublikController.updateUserPublic
+  userPublikController.deleteSaveNews
 );
+// Page : Edit User
+router.put(
+  "/public/edit-account",
+  verifyToken,
+  usersController.updateUser
+);
+
+// Halaman User Magang
+// Page : Intern - Dashboard
+router.get("/intern/dashboard", verifyToken, userInternController.dashboardIntern);
+// Page : Intern - Menulis Berita
+router.post("/intern/write-news", verifyToken, userInternController.writeNews);
+router.put("/intern/write-news/:id_news", verifyToken, userInternController.updateNews);
+router.delete("/intern/write-news/:id_news", verifyToken, userInternController.deleteNews);
+// Page : User - Edit User
+router.put("/intern/edit-account", verifyToken, usersController.updateUser);
+
 
 // Page : Bukan Page / Testing
 router.get("/users", verifyToken, usersController.getUsers);

@@ -1,5 +1,4 @@
 const Public = require("../models/userPublicModels");
-const bcrypt = require("bcrypt");
 
 // Halaman Dashboard
 const dashboardPublic = async (req, res) => {
@@ -13,6 +12,9 @@ const dashboardPublic = async (req, res) => {
         Public.getLikeNews(id_user),
         Public.getSaveNews(id_user),
       ]);
+
+    if (userData.role !== "public")
+      return res.status(400).json({ message: "Anda bukan user public" });
 
     res.status(200).json({
       userData,
@@ -45,7 +47,7 @@ const likeNews = async (req, res) => {
 
 const deleteLikeNews = async (req, res) => {
   try {
-    const likeId = parseInt(req.params.id);
+    const likeId = parseInt(req.params.id_like);
     const data = await Public.deleteLikeNews(likeId);
 
     res.status(200).json({
@@ -76,7 +78,7 @@ const saveNews = async (req, res) => {
 
 const deleteSaveNews = async (req, res) => {
   try {
-    const saveId = parseInt(req.params.id);
+    const saveId = parseInt(req.params.id_save);
     const data = await Public.deleteSaveNews(saveId);
 
     res.status(200).json({
@@ -91,50 +93,10 @@ const deleteSaveNews = async (req, res) => {
   }
 };
 
-const updateUserPublic = async (req, res) => {
-  try {
-    const { name, username, email, password_lama, password_baru } = req.body;
-    const userId = req.userId;
-
-    const user = await Public.getUserPublic(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User tidak ditemukan" });
-    }
-
-    const isPasswordValid = await bcrypt.compare(password_lama, user.password);
-    if (!isPasswordValid) {
-      return res.status(400).json({ message: "Password Lama tidak cocok" });
-    }
-
-    const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(password_baru, salt);
-
-    const dataUpdate = {
-      name,
-      username,
-      email,
-      password: hashPassword,
-    };
-
-    const data = await Public.updateUserPublic(userId, dataUpdate);
-
-    res.status(200).json({
-      message: "Data berhasil diperbarui",
-      data,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "Terjadi Kesalahan",
-      error: error.message,
-    });
-  }
-};
-
 module.exports = {
   dashboardPublic,
   likeNews,
   saveNews,
-  updateUserPublic,
   deleteLikeNews,
   deleteSaveNews,
 };

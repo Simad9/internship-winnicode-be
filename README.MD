@@ -2,7 +2,7 @@
 
 ### TODO :
 
-- [ ] Bikin User Publik
+- [x] Bikin User Publik
   - [x] Ambil data diri
   - [x] update data diri
   - [x] Hitung berita disukai
@@ -12,14 +12,15 @@
   - [x] Hapus berita yang disukai
   - [x] hapus berita yang disimpan
 - [ ] Bikin User Magang
-  - [ ] Ambil data diri
-  - [ ] update data diri
-  - [ ] Ambil tugas
-  - [ ] Ambil berita peding
-  - [ ] Ambil berita yang ditulis
-  - [ ] Nulis berita
-  - [ ] Edit berita yang ditulis
-  - [ ] Hapus berita yang ditulis
+  - [x] Ambil data diri
+  - [x] update data diri
+  - [x] Ambil tugas (?)
+  - [x] Ambil berita pending (?)
+  - [x] Ambil berita yang ditulis
+  - [x] Nulis berita
+  - [x] request category
+  - [x] Edit berita yang ditulis
+  - [x] Hapus berita yang ditulis (soft delete)
 - [ ] Bikin User Admin (Belakangan - Karena masih banyak yang belum jadi)
   - [ ] Ambil data diri
   - [ ] update data diri
@@ -34,7 +35,22 @@
 
 ### NOTE :
 
-- Nanti rapikan untuk model dan controller, mau dibuat strict atau sesuai kebutuhan aja
-Untuk pengambilan ata pada sisi user kurang nya : 
+Untuk pengambilan ata pada sisi user kurang nya :
+
 - Berita urutan desc, terus di dasboard mau berapa yang diquery,
 - Yang di halaman like sama save itu mau ada berapa + pagination di BE aja
+
+// Bagian Nambah berita
+Jadi berita yang ditulis user bakal jadi pending
+Nah nanti admin bakal nampilin semua data yang pending
+Terus nanti bakal di kasih note, otomatis data news akan di tempel data pending
+Udah itu sih
+
+// Edit berita
+Saat edit berita request kategori dimatikan, jadi kesempatan req kategori saat nulis aja
+
+//Edit Akun
+Bisa dijadiin sama aja untuk 3 role
+
+// SOFT DELETE
+rupanya cuman update delete menjadi tanggal sekarang, terus nanti pas nampilin delete yang null doang. Sama aja sih gak kehapus berarti.

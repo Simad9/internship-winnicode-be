@@ -61,26 +61,26 @@ model Category {
 }
 
 model News {
-  id_news    Int       @id @default(autoincrement())
-  task       Task      @relation(fields: [taskId], references: [id_task], onDelete: Cascade, onUpdate: Cascade)
+  id_news    Int          @id @default(autoincrement())
+  task       Task         @relation(fields: [taskId], references: [id_task], onDelete: Cascade, onUpdate: Cascade)
   taskId     Int
-  category   Category  @relation(fields: [categoryId], references: [id_category], onDelete: Cascade, onUpdate: Cascade)
+  category   Category     @relation(fields: [categoryId], references: [id_category], onDelete: Cascade, onUpdate: Cascade)
   categoryId Int
-  pending    Pending?  @relation(fields: [pendingId], references: [id_pending], onDelete: Cascade, onUpdate: Cascade)
-  pendingId  Int?
-  author     User      @relation(fields: [authorId], references: [id_user], onDelete: Cascade, onUpdate: Cascade)
+  author     User         @relation(fields: [authorId], references: [id_user], onDelete: Cascade, onUpdate: Cascade)
   authorId   Int
   title      String
-  content    String    @db.Text
+  content    String       @db.Text
   image      String
-  created_at DateTime  @default(now())
-  updated_at DateTime? @updatedAt
+  status     Status_News? @default(pending)
+  created_at DateTime     @default(now())
+  updated_at DateTime?    @updatedAt
   deleted_at DateTime?
 
   // Relasi
   likes    Like[]
   saves    Save[]
   comments Comment[]
+  pending  Pending[]
 }
 
 model Like {
@@ -115,11 +115,12 @@ model Comment {
 
 model Pending {
   id_pending  Int         @id @default(autoincrement())
+  news        News        @relation(fields: [newsId], references: [id_news], onDelete: Cascade, onUpdate: Cascade)
+  newsId      Int
   status      Status_News @default(pending)
   note        String?
   created_at  DateTime    @default(now())
   resolved_at DateTime?
-  News        News[]
 }
 
 // -- ENUM --
@@ -139,3 +140,4 @@ enum Status_Category {
   accepted
   decline
 }
+
