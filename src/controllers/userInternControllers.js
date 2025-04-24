@@ -1,4 +1,5 @@
 const Intern = require("../models/userInternModels");
+const validasiUploadImage = require("../utils/validasiUploadImage");
 
 const dashboardIntern = async (req, res) => {
   try {
@@ -28,8 +29,7 @@ const dashboardIntern = async (req, res) => {
 const writeNews = async (req, res) => {
   try {
     const userId = req.userId;
-    const { taskId, categoryId, title, content, image, req_category } =
-      req.body;
+    const { taskId, categoryId, title, content, req_category } = req.body;
 
     // Author bisa request category
     if (req_category != "") {
@@ -37,12 +37,12 @@ const writeNews = async (req, res) => {
     }
 
     const data = {
-      taskId,
-      categoryId,
+      taskId: parseInt(taskId),
+      categoryId: parseInt(categoryId),
       authorId: userId,
       title,
       content,
-      image,
+      image: await validasiUploadImage(req.file, "news"),
     };
     const newNews = await Intern.writeNews(data);
 
@@ -62,14 +62,18 @@ const updateNews = async (req, res) => {
   try {
     const newsId = parseInt(req.params.id_news);
 
-    const { taskId, categoryId, title, content, image } = req.body;
+    const { taskId, categoryId, title, content } = req.body;
+
+    if (req.file) {
+      dataUpdate.image = await validasiUploadImage(req.file, "news");
+    }
 
     const dataUpdate = {
-      taskId,
-      categoryId,
+      taskId: parseInt(taskId),
+      categoryId: parseInt(categoryId),
       title,
       content,
-      image,
+      image: dataUpdate,
     };
 
     const data = await Intern.updateNews(newsId, dataUpdate);

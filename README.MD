@@ -14,6 +14,10 @@ Untuk pengambilan ata pada sisi user kurang nya :
 // SOFT DELETE
 rupanya cuman update delete menjadi tanggal sekarang, terus nanti pas nampilin delete yang null doang. Sama aja sih gak kehapus berarti.
 
+// UPLOAD GAMBAR
+untuk gambar, kalo nambahin berhasil, tinggal bikin yang update aja
+Kalo update perlu menghapus image lama, beratnya disitu
+
 // Crosschek
 Crooscheck lagi apakah query DB nya udah oke semua
 

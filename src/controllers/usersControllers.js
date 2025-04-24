@@ -1,5 +1,6 @@
 const User = require("../models/usersModels");
 const bcrypt = require("bcrypt");
+const validasiUploadImage = require("../utils/validasiUploadImage");
 
 const getUsers = async (req, res) => {
   try {
@@ -31,34 +32,45 @@ const getUserById = async (req, res) => {
     });
   }
 };
-
 const updateUser = async (req, res) => {
   try {
+    // Ambil data dari request
     const { name, username, email, password_lama, password_baru } = req.body;
     const userId = req.userId;
+    const fileInput = req.file;
 
+    // Cek User
     const user = await User.getUserById(userId);
     if (!user) {
       return res.status(404).json({ message: "User tidak ditemukan" });
     }
 
+    // Compare password
     const isPasswordValid = await bcrypt.compare(password_lama, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Password Lama tidak cocok" });
     }
 
+    // Hasing Password
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password_baru, salt);
 
+    // Upload Gambar di Claudinary
+    const cloudUrl = await validasiUploadImage(fileInput, "profile_picture");
+
+    // Data dikumpulkan
     const dataUpdate = {
       name,
       username,
       email,
       password: hashPassword,
+      profile_picture: cloudUrl,
     };
 
+    // Query Data
     const data = await User.updateUser(userId, dataUpdate);
 
+    // Response
     res.status(200).json({
       message: "Data berhasil diperbarui",
       data,

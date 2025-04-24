@@ -1,23 +1,20 @@
-###
-GET http://localhost:5000/api/admin/dashboard
+### Edit Akun
+GET http://localhost:5000/api/public/dashboard
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDU0NzM0OTMsImV4cCI6MTc0NTQ3MzUxM30.YOJhSeKTtyG4odGATb0tI2wgv-0b4QY6mqB3107hxRY
-
+Authorization: Bereer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJ1c2VybmFtZSI6IldpamRhbjEyMyIsInJvbGUiOiJwdWJsaWMiLCJpYXQiOjE3NDU0Nzk3OTgsImV4cCI6MTc0NTQ3OTgxOH0.V41X57ln9ZF-3tN6XY766A0Vw9170nwt7Nf6HNQFwpE
 
 ###
 # Refresh Token 
 GET http://localhost:5000/api/token
 Content-Type: application/json
 
+
 ###
-# Login Akun 
+# == Halaman Login ==
 POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-  "username" : "Admin123",
-  "password" : "Admin123"
+  "username" : "Wijdan123",
+  "password" : "Wijdan123"
 }
-
-
-

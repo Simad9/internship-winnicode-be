@@ -13,6 +13,7 @@ const getUserIntern = async (id_user) => {
       email: true,
       password: true,
       role: true,
+      profile_picture: true,
     },
   });
   return result;

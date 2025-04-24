@@ -1,6 +1,7 @@
 const Admin = require("../models/userAdminModels");
 const User = require("../models/usersModels");
 const bcrypt = require("bcrypt");
+const validasiUploadImage = require("../utils/validasiUploadImage");
 
 const dashboardAdmin = async (req, res) => {
   try {
@@ -151,6 +152,7 @@ const updateControlAccount = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: await bcrypt.hashSync(req.body.password, salt),
+      profile_picture: await validasiUploadImage(req.file, "profile_picture"),
     };
     const data = await Admin.updateControlAccount(id_user, dataForm);
     res.status(200).json({
@@ -205,6 +207,7 @@ const updateInternsAccount = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: await bcrypt.hashSync(req.body.password, salt),
+      profile_picture: await validasiUploadImage(req.file, "profile_picture"),
     };
     const data = await Admin.updateInternsAccount(id_user, dataForm);
     res.status(200).json({
@@ -259,6 +262,7 @@ const updateUsersAccount = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: await bcrypt.hashSync(req.body.password, salt),
+      profile_picture: await validasiUploadImage(req.file, "profile_picture"),
     };
     const data = await Admin.updateUsersAccount(id_user, dataForm);
     res.status(200).json({
@@ -317,7 +321,6 @@ const updateMarkIntern = async (req, res) => {
     const marks = req.body.marks;
 
     console.log(marks);
-    
 
     const promises = marks.map((mark) => Admin.updateMarkIntern(id_user, mark));
     const data = await Promise.all(promises);

@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 
 // Middlewares
 const verifyToken = require("../middlewares/verifyToken");
 const checkRole = require("../middlewares/checkRole");
+const upload = multer({ dest: "uploads/" }); // folder penyimpanan file
 
 // Controllers
 const usersController = require("../controllers/usersControllers");
@@ -32,7 +34,7 @@ router.delete(
   userPublikController.deleteSaveNews
 );
 
-// Page : User - Dashboard
+// Page : User - Like News
 router.get(
   "/like",
   verifyToken,
@@ -46,7 +48,7 @@ router.delete(
   userPublikController.deleteLikeNews
 );
 
-// Page : User - Dashboard
+// Page : User - Save News
 router.get(
   "/save",
   verifyToken,
@@ -65,6 +67,7 @@ router.put(
   "/edit-account",
   verifyToken,
   checkRole(requireRole),
+  upload.single("profile_picture"),
   usersController.updateUser
 );
 

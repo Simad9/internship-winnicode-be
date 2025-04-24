@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 
 // Middlewares
 const verifyToken = require("../middlewares/verifyToken");
 const checkRole = require("../middlewares/checkRole");
+const upload = multer({ dest: "uploads/" }); // folder penyimpanan file
 
 // Controllers
 const usersController = require("../controllers/usersControllers");
@@ -21,11 +23,18 @@ router.get(
 );
 
 // Page : Intern - Menulis Berita
-router.post("/write-news", verifyToken, userInternController.writeNews);
+router.post(
+  "/write-news",
+  verifyToken,
+  checkRole(requireRole),
+  upload.single("image"),
+  userInternController.writeNews
+);
 router.put(
   "/write-news/:id_news",
   verifyToken,
   checkRole(requireRole),
+  upload.single("image"),
   userInternController.updateNews
 );
 router.delete(
@@ -40,6 +49,7 @@ router.put(
   "/edit-account",
   verifyToken,
   checkRole(requireRole),
+  upload.single("profile_picture"),
   usersController.updateUser
 );
 

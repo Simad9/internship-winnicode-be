@@ -17,7 +17,7 @@ Content-Type: application/json
 ###
 # == Halaman Login ==
 # Login Akun (✅ Sukses)
-POST http://localhost:5000/api/users/login
+POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 ###
 # == Halaman Register ==
 # Register Akun (✅ Sukses)
-POST http://localhost:5000/api/users/register
+POST http://localhost:5000/api/register
 Content-Type: application/json
 
 {

@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 
 // Middlewares
 const verifyToken = require("../middlewares/verifyToken");
 const checkRole = require("../middlewares/checkRole");
+const upload = multer({ dest: "uploads/" }); // folder penyimpanan file
 
 // Controllers
 const usersController = require("../controllers/usersControllers");
@@ -39,6 +41,7 @@ router.get(
   checkRole(requireRole),
   userAdminController.pendingNews
 );
+
 // Page : Admin - Review News
 router.get(
   "/review-news/:id_news",
@@ -58,13 +61,13 @@ router.get(
   "/control-account",
   verifyToken,
   checkRole(requireRole),
-  checkRole("admin"),
   userAdminController.controlAccount
 );
 router.put(
   "/control-account/:id_user",
   verifyToken,
   checkRole(requireRole),
+  upload.single("profile_picture"),
   userAdminController.updateControlAccount
 );
 router.delete(
@@ -83,6 +86,7 @@ router.put(
   "/control-account/intern/:id_user",
   verifyToken,
   checkRole(requireRole),
+  upload.single("profile_picture"),
   userAdminController.updateInternsAccount
 );
 router.delete(
@@ -98,9 +102,10 @@ router.get(
   userAdminController.usersAccount
 );
 router.put(
-  "/control-account/use/:id_user",
+  "/control-account/user/:id_user",
   verifyToken,
   checkRole(requireRole),
+  upload.single("profile_picture"),
   userAdminController.updateUsersAccount
 );
 router.delete(
@@ -129,6 +134,7 @@ router.put(
   "/edit-account",
   verifyToken,
   checkRole(requireRole),
+  upload.single("profile_picture"),
   usersController.updateUser
 );
 

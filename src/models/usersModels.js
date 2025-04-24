@@ -18,6 +18,7 @@ const getUserById = async (userId) => {
       email: true,
       password: true,
       role: true,
+      profile_picture: true,
     },
   });
   return result;

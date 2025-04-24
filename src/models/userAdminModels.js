@@ -8,10 +8,10 @@ const getUserAdmin = async (userId) => {
     },
     select: {
       id_user: true,
-      profile_picture: true,
       name: true,
       email: true,
       role: true,
+      profile_picture: true,
     },
   });
   return userAdmin;
