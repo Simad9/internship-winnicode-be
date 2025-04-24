@@ -6,7 +6,7 @@ const dashboardIntern = async (req, res) => {
 
     const [userData, taskData, pendingData, newsAuthor] = await Promise.all([
       Intern.getUserIntern(userId),
-      Intern.getTaskData(),
+      Intern.getTaskData(userId),
       Intern.getPendingData(userId),
       Intern.getNewsAuthor(userId),
     ]);

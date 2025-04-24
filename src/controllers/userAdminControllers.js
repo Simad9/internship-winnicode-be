@@ -1,4 +1,6 @@
 const Admin = require("../models/userAdminModels");
+const User = require("../models/usersModels");
+const bcrypt = require("bcrypt");
 
 const dashboardAdmin = async (req, res) => {
   try {
@@ -104,6 +106,7 @@ const updateReviewNews = async (req, res) => {
   try {
     const newsId = parseInt(req.params.id_news);
     const { status, note } = req.body;
+    console.log(status, note);
 
     // Kalo di approved admin tampilin di halaman news
     if (note == "approved") {
@@ -142,7 +145,13 @@ const controlAccount = async (req, res) => {
 const updateControlAccount = async (req, res) => {
   try {
     const id_user = parseInt(req.params.id_user);
-    const dataForm = req.body;
+    const salt = await bcrypt.genSalt();
+    const dataForm = {
+      name: req.body.name,
+      username: req.body.username,
+      email: req.body.email,
+      password: await bcrypt.hashSync(req.body.password, salt),
+    };
     const data = await Admin.updateControlAccount(id_user, dataForm);
     res.status(200).json({
       message: "Data berhasil diperbarui",
@@ -190,7 +199,13 @@ const internsAccount = async (req, res) => {
 const updateInternsAccount = async (req, res) => {
   try {
     const id_user = parseInt(req.params.id_user);
-    const dataForm = req.body;
+    const salt = await bcrypt.genSalt();
+    const dataForm = {
+      name: req.body.name,
+      username: req.body.username,
+      email: req.body.email,
+      password: await bcrypt.hashSync(req.body.password, salt),
+    };
     const data = await Admin.updateInternsAccount(id_user, dataForm);
     res.status(200).json({
       message: "Data berhasil diperbarui",
@@ -220,9 +235,9 @@ const deleteInternsAccount = async (req, res) => {
   }
 };
 
-const ussersAccount = async (req, res) => {
+const usersAccount = async (req, res) => {
   try {
-    const data = await Admin.getUssersAccount();
+    const data = await Admin.getUsersAccount();
     res.status(200).json({
       message: "Data berhasil ditarik",
       data: data,
@@ -235,11 +250,17 @@ const ussersAccount = async (req, res) => {
   }
 };
 
-const updateUssersAccount = async (req, res) => {
+const updateUsersAccount = async (req, res) => {
   try {
     const id_user = parseInt(req.params.id_user);
-    const dataForm = req.body;
-    const data = await Admin.updateInternsAccount(id_user, dataForm);
+    const salt = await bcrypt.genSalt();
+    const dataForm = {
+      name: req.body.name,
+      username: req.body.username,
+      email: req.body.email,
+      password: await bcrypt.hashSync(req.body.password, salt),
+    };
+    const data = await Admin.updateUsersAccount(id_user, dataForm);
     res.status(200).json({
       message: "Data berhasil diperbarui",
       data: data,
@@ -252,12 +273,57 @@ const updateUssersAccount = async (req, res) => {
   }
 };
 
-const deleteUssersAccount = async (req, res) => {
+const deleteUsersAccount = async (req, res) => {
   try {
     const id_user = parseInt(req.params.id_user);
-    const data = await Admin.deleteInternsAccount(id_user);
+    const data = await Admin.deleteUsersAccount(id_user);
     res.status(200).json({
       message: "Data berhasil dihapus",
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
+const markIntern = async (req, res) => {
+  try {
+    const id_user = parseInt(req.params.id_user);
+    const [dataIntern, dataMarkIntern] = await Promise.all([
+      User.getUserById(id_user),
+      Admin.getMarkIntern(id_user),
+    ]);
+    res.status(200).json({
+      message: "Data berhasil ditambah",
+      data: {
+        dataIntern,
+        dataMarkIntern,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
+const updateMarkIntern = async (req, res) => {
+  try {
+    const id_user = parseInt(req.params.id_user);
+    const marks = req.body.marks;
+
+    console.log(marks);
+    
+
+    const promises = marks.map((mark) => Admin.updateMarkIntern(id_user, mark));
+    const data = await Promise.all(promises);
+
+    res.status(200).json({
+      message: "Data berhasil diperbarui",
       data: data,
     });
   } catch (error) {
@@ -275,6 +341,8 @@ module.exports = {
   pendingNews,
   reviewNews,
   updateReviewNews,
+  markIntern,
+  updateMarkIntern,
   // Control Account
   controlAccount,
   updateControlAccount,
@@ -282,7 +350,7 @@ module.exports = {
   internsAccount,
   updateInternsAccount,
   deleteInternsAccount,
-  ussersAccount,
-  updateUssersAccount,
-  deleteUssersAccount,
+  usersAccount,
+  updateUsersAccount,
+  deleteUsersAccount,
 };

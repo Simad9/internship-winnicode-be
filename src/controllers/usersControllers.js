@@ -16,6 +16,22 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  try {
+    const userId = req.params.id_user;
+    const user = await User.getUserById(userId);
+    res.status(200).json({
+      message: "Data berhasil ditarik",
+      data: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
 const updateUser = async (req, res) => {
   try {
     const { name, username, email, password_lama, password_baru } = req.body;
@@ -57,5 +73,6 @@ const updateUser = async (req, res) => {
 
 module.exports = {
   getUsers,
+  getUserById,
   updateUser,
 };

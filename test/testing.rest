@@ -1,12 +1,14 @@
 ###
 # == Halaman Dashboard User
-PUT http://localhost:5000/api/admin/review-news/22
+PUT http://localhost:5000/api/admin/mark-intern/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJlbWFpbCI6IkFkbWluMTIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ1MzU5NjAxLCJleHAiOjE3NDUzNTk2MjF9.CgdqN_T4K1-VRUbDrkq1JPPma3x1e8TGfaSiMw_9WpY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoiSW5kcmExMjMiLCJyb2xlIjoiaW50ZXJuIiwiaWF0IjoxNzQ1NDU0Njg1LCJleHAiOjE3NDU0NTQ3MDV9.PRFDT9fEhibU6L5ZY6tXnaQhTVmUV5UR_2pBiSsnsFM
 
 {
-  "status": "approve",
-  "note": "Bagus pertahankan di tugas selanjutnya"
+  "marks": [
+    { "taskId": 1, "mark": 95 },
+    { "taskId": 2, "mark": 100 }
+  ]
 }
 
 ###
@@ -20,9 +22,10 @@ POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
-  "username" : "Admin123",
-  "password" : "Admin123"
+  "username" : "Indra123",
+  "password" : "Indra123"
 }
+
 
 ###
 PUT http://localhost:5000/api/intern/edit-account

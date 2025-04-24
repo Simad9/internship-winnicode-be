@@ -25,6 +25,7 @@ const getPendingData = async () => {
     select: {
       id_news: true,
       title: true,
+      content: true,
       image: true,
       created_at: true,
       status: true,
@@ -38,7 +39,6 @@ const getPendingData = async () => {
           name: true,
         },
       },
-      created_at: true,
     },
     orderBy: {
       created_at: "desc",
@@ -139,12 +139,23 @@ const getReviewNews = async (newsId) => {
 };
 
 const updateReviewNews = async (newsId, data) => {
-  const result = await prisma.pending.update({
+  await prisma.pending.create({
+    data: {
+      newsId: newsId,
+      note: data.note,
+      status: data.status,
+    },
+  });
+
+  const result = await prisma.news.update({
     where: {
       id_news: newsId,
     },
-    data: data,
+    data: {
+      status: data.status,
+    },
   });
+
   return result;
 };
 
@@ -158,13 +169,13 @@ const approveNews = async (newsId) => {
     },
   });
   return result;
-}
+};
 
 const getControlAccount = async () => {
   const result = await prisma.user.findMany({
     select: {
       id_user: true,
-      image: true,
+      profile_picture: true,
       name: true,
       email: true,
       role: true,
@@ -197,7 +208,7 @@ const getInternsAccount = async () => {
     },
     select: {
       id_user: true,
-      image: true,
+      profile_picture: true,
       name: true,
       email: true,
       role: true,
@@ -231,7 +242,7 @@ const getUsersAccount = async () => {
     },
     select: {
       id_user: true,
-      image: true,
+      profile_picture: true,
       name: true,
       email: true,
       role: true,
@@ -258,6 +269,40 @@ const deleteUsersAccount = async (id_user) => {
   return result;
 };
 
+const getMarkIntern = async (id_user) => {
+  const result = await prisma.mark.findMany({
+    where: {
+      userId: id_user,
+    },
+    select: {
+      id_user: true,
+      taskId: true,
+      mark: true,
+    },
+  });
+  return result;
+};
+
+const updateMarkIntern = async (id_user, data) => {
+  const result = await prisma.mark.upsert({
+    where: {
+      userId_taskId: {
+        userId: id_user,
+        taskId: data.taskId
+      }
+    },
+    update: {
+      mark: data.mark,
+    },
+    create: {
+      userId: id_user,
+      taskId: data.taskId,
+      mark: data.mark,
+    },
+  });
+  return result;
+};
+
 module.exports = {
   getUserAdmin,
   getPendingData,
@@ -270,6 +315,8 @@ module.exports = {
   getReviewNews,
   updateReviewNews,
   approveNews,
+  getMarkIntern,
+  updateMarkIntern,
   // Control Account
   getControlAccount,
   updateControlAccount,

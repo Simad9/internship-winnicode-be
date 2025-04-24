@@ -18,8 +18,15 @@ const getUserIntern = async (id_user) => {
   return result;
 };
 
-const getTaskData = async () => {
+const getTaskData = async (userId) => {
   const result = await prisma.task.findMany({
+    where: {
+      news: {
+        none: {
+          authorId: userId,
+        },
+      },
+    },
     select: {
       id_task: true,
       task_title: true,
@@ -32,9 +39,16 @@ const getTaskData = async () => {
 const getPendingData = async (userId) => {
   const result = await prisma.news.findMany({
     where: {
-      status: "pending",
+      authorId: userId,
       AND: {
-        authorId: userId,
+        OR: [
+          {
+            status: "pending",
+          },
+          {
+            status: "revised",
+          },
+        ],
       },
     },
     select: {
@@ -56,13 +70,23 @@ const getNewsAuthor = async (userId) => {
     },
     select: {
       id_news: true,
+      taskId: true,
       title: true,
       content: true,
       image: true,
       created_at: true,
+      status: true,
       category: {
         select: {
           category: true,
+        },
+      },
+      pending: {
+        select: {
+          note: true,
+        },
+        where: {
+          status: "revised",
         },
       },
     },
@@ -92,7 +116,14 @@ const updateNews = async (newsId, data) => {
     where: {
       id_news: newsId,
     },
-    data: data,
+    data: {
+      taskId: data.taskId,
+      categoryId: data.categoryId,
+      title: data.title,
+      content: data.content,
+      image: data.image,
+      status: "pending",
+    },
   });
   return result;
 };

@@ -51,12 +51,12 @@ const login = async (req, res) => {
 
     // JWT Sign
     const accessToken = jwt.sign(
-      { userId: data.id_user, username: username, email: email },
+      { userId: data.id_user, username: username, role: data.role },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "20s" }
     );
     const refreshToken = jwt.sign(
-      { userId: data.id_user, username: username, email: email },
+      { userId: data.id_user, username: username, role: data.role },
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: "1d" }
     );
@@ -71,7 +71,6 @@ const login = async (req, res) => {
     });
     return res.json({
       accessToken,
-      role: data.role,
     });
   } catch (error) {
     res.status(500).json({
@@ -98,9 +97,9 @@ const refreshToken = async (req, res) => {
       (err, decoded) => {
         if (err) return res.status(403);
 
-        const { id_user: userId, username, email } = user;
+        const { id_user: userId, username, role } = user;
         const accessToken = jwt.sign(
-          { userId, username, email },
+          { userId, username, role },
           process.env.ACCESS_TOKEN_SECRET,
           { expiresIn: "20s" }
         );

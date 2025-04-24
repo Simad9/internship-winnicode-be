@@ -8,6 +8,8 @@ const verifyToken = (req, res, next) => {
     if (err) return res.sendStatus(403);
     req.username = decoded.username;
     req.userId = decoded.userId;
+    req.role = decoded.role;
+
     next();
   });
 };

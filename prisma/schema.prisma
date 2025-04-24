@@ -34,6 +34,7 @@ model User {
   comments Comment[]
   likes    Like[]
   saves    Save[]
+  marks    Mark[]
 }
 
 model Task {
@@ -45,7 +46,8 @@ model Task {
   deleted_at    DateTime?
 
   // Relasi
-  news News[]
+  news  News[]
+  marks Mark[]
 }
 
 model Category {
@@ -123,6 +125,20 @@ model Pending {
   resolved_at DateTime?
 }
 
+model Mark {
+  id_mark    Int       @id @default(autoincrement())
+  id_task    Task      @relation(fields: [taskId], references: [id_task], onDelete: Cascade, onUpdate: Cascade)
+  taskId     Int
+  id_user    User      @relation(fields: [userId], references: [id_user], onDelete: Cascade, onUpdate: Cascade)
+  userId     Int
+  mark       Int
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+  deleted_at DateTime?
+
+  @@unique([userId, taskId])
+}
+
 // -- ENUM --
 enum Role {
   public
@@ -140,4 +156,3 @@ enum Status_Category {
   accepted
   decline
 }
-

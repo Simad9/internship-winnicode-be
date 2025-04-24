@@ -43,11 +43,6 @@ Untuk pengambilan ata pada sisi user kurang nya :
 // SOFT DELETE
 rupanya cuman update delete menjadi tanggal sekarang, terus nanti pas nampilin delete yang null doang. Sama aja sih gak kehapus berarti.
 
-// Hasil Review Admin
-Anak intern belum tau cara lihat note intern yang dikasih
-
-// Pengecekan Ulang
-Untuk dashboard khusus role itu, yang lain dilarang akses
-
 // Crosschek
 Crooscheck lagi apakah query DB nya udah oke semua
+
