@@ -1,0 +1,135 @@
+const express = require("express");
+const router = express.Router();
+
+// Middlewares
+const verifyToken = require("../middlewares/verifyToken");
+const checkRole = require("../middlewares/checkRole");
+
+// Controllers
+const usersController = require("../controllers/usersControllers");
+const userAdminController = require("../controllers/userAdminControllers");
+
+// Role
+const requireRole = "admin";
+
+// Page : Admin - Dashboard
+router.get(
+  "/dashboard",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.dashboardAdmin
+);
+router.put(
+  "/dashboard/approve-category/:id_category",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.approveReqCategory
+);
+router.delete(
+  "/dashboard/delete-category/:id_category",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.deleteReqCategory
+);
+
+// Page : Admin - Pending News
+router.get(
+  "/pending-news",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.pendingNews
+);
+// Page : Admin - Review News
+router.get(
+  "/review-news/:id_news",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.reviewNews
+);
+router.put(
+  "/review-news/:id_news",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.updateReviewNews
+);
+
+// Page : Admin - Kontrol Akun
+router.get(
+  "/control-account",
+  verifyToken,
+  checkRole(requireRole),
+  checkRole("admin"),
+  userAdminController.controlAccount
+);
+router.put(
+  "/control-account/:id_user",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.updateControlAccount
+);
+router.delete(
+  "/control-account/:id_user",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.deleteControlAccount
+);
+router.get(
+  "/control-account/intern",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.internsAccount
+);
+router.put(
+  "/control-account/intern/:id_user",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.updateInternsAccount
+);
+router.delete(
+  "/control-account/intern/:id_user",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.deleteInternsAccount
+);
+router.get(
+  "/control-account/user",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.usersAccount
+);
+router.put(
+  "/control-account/use/:id_user",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.updateUsersAccount
+);
+router.delete(
+  "/control-account/user/:id_user",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.deleteUsersAccount
+);
+
+// Page : Admin - Menlai Anak Magang
+router.get(
+  "/mark-intern/:id_user",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.markIntern
+);
+router.put(
+  "/mark-intern/:id_user",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.updateMarkIntern
+);
+
+// Page : Admin - Edit User
+router.put(
+  "/edit-account",
+  verifyToken,
+  checkRole(requireRole),
+  usersController.updateUser
+);
+
+module.exports = router;

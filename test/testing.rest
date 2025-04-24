@@ -1,15 +1,8 @@
 ###
-# == Halaman Dashboard User
-PUT http://localhost:5000/api/admin/mark-intern/2
+GET http://localhost:5000/api/admin/dashboard
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoiSW5kcmExMjMiLCJyb2xlIjoiaW50ZXJuIiwiaWF0IjoxNzQ1NDU0Njg1LCJleHAiOjE3NDU0NTQ3MDV9.PRFDT9fEhibU6L5ZY6tXnaQhTVmUV5UR_2pBiSsnsFM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDU0NzM0OTMsImV4cCI6MTc0NTQ3MzUxM30.YOJhSeKTtyG4odGATb0tI2wgv-0b4QY6mqB3107hxRY
 
-{
-  "marks": [
-    { "taskId": 1, "mark": 95 },
-    { "taskId": 2, "mark": 100 }
-  ]
-}
 
 ###
 # Refresh Token 
@@ -18,24 +11,13 @@ Content-Type: application/json
 
 ###
 # Login Akun 
-POST http://localhost:5000/api/users/login
+POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-  "username" : "Indra123",
-  "password" : "Indra123"
+  "username" : "Admin123",
+  "password" : "Admin123"
 }
 
 
-###
-PUT http://localhost:5000/api/intern/edit-account
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJ1c2VybmFtZSI6IldpamRhbjEyMyIsImVtYWlsIjoiV2lqZGFuMTIzQGdtYWlsLmNvbSIsImlhdCI6MTc0NTM1MTEyNSwiZXhwIjoxNzQ1MzUxMTQ1fQ.lPoJ5lVOeFJaEE4V-ySFT_MoUz7ljGJ-DnKEr9E2F0M
 
-{
-  "name" : "Wijdan Akhmad",
-  "username" : "Wijdan123",
-  "email" : "Wijdan123@gmail.com",
-  "password_lama": "Wijdan12345",
-  "password_baru": "Wijdan123"
-}
