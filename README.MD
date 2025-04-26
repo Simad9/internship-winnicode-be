@@ -2,7 +2,6 @@
 
 ### TODO :
 
-- Pake Claudinary untuk upload foto
 
 ### NOTE :
 

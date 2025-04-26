@@ -55,17 +55,20 @@ const updateUser = async (req, res) => {
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password_baru, salt);
 
-    // Upload Gambar di Claudinary
-    const cloudUrl = await validasiUploadImage(fileInput, "profile_picture");
-
     // Data dikumpulkan
     const dataUpdate = {
       name,
       username,
       email,
       password: hashPassword,
-      profile_picture: cloudUrl,
     };
+
+    if (req.file) {
+      dataUpdate.image = await validasiUploadImage(
+        fileInput,
+        "profile_picture"
+      );
+    }
 
     // Query Data
     const data = await User.updateUser(userId, dataUpdate);

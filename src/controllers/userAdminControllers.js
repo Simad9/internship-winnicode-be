@@ -152,8 +152,13 @@ const updateControlAccount = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: await bcrypt.hashSync(req.body.password, salt),
-      profile_picture: await validasiUploadImage(req.file, "profile_picture"),
     };
+    if (req.file) {
+      dataForm.profile_picture = await validasiUploadImage(
+        req.file,
+        "profile_picture"
+      );
+    }
     const data = await Admin.updateControlAccount(id_user, dataForm);
     res.status(200).json({
       message: "Data berhasil diperbarui",
@@ -207,8 +212,13 @@ const updateInternsAccount = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: await bcrypt.hashSync(req.body.password, salt),
-      profile_picture: await validasiUploadImage(req.file, "profile_picture"),
     };
+    if (req.file) {
+      dataForm.profile_picture = await validasiUploadImage(
+        req.file,
+        "profile_picture"
+      );
+    }
     const data = await Admin.updateInternsAccount(id_user, dataForm);
     res.status(200).json({
       message: "Data berhasil diperbarui",
@@ -262,8 +272,14 @@ const updateUsersAccount = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: await bcrypt.hashSync(req.body.password, salt),
-      profile_picture: await validasiUploadImage(req.file, "profile_picture"),
+
     };
+    if (req.file) {
+      dataForm.profile_picture = await validasiUploadImage(
+        req.file,
+        "profile_picture"
+      );
+    }
     const data = await Admin.updateUsersAccount(id_user, dataForm);
     res.status(200).json({
       message: "Data berhasil diperbarui",

@@ -64,17 +64,16 @@ const updateNews = async (req, res) => {
 
     const { taskId, categoryId, title, content } = req.body;
 
-    if (req.file) {
-      dataUpdate.image = await validasiUploadImage(req.file, "news");
-    }
-
     const dataUpdate = {
       taskId: parseInt(taskId),
       categoryId: parseInt(categoryId),
       title,
       content,
-      image: dataUpdate,
     };
+
+    if (req.file) {
+      dataUpdate.image = await validasiUploadImage(req.file, "news");
+    }
 
     const data = await Intern.updateNews(newsId, dataUpdate);
 
