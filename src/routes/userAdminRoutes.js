@@ -129,6 +129,26 @@ router.put(
   userAdminController.updateMarkIntern
 );
 
+//Page : Admin - Edit Tugas
+router.get(
+  "/task",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.getTask
+);
+router.post(
+  "/task",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.createTask
+);
+router.put(
+  "/task/:id_task",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.updateTask
+);
+
 // Page : Admin - Edit User
 router.put(
   "/edit-account",

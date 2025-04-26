@@ -1,7 +1,13 @@
 ### Edit Akun
-GET http://localhost:5000/api/public/dashboard
+GET http://localhost:5000/api/admin/task/
 Content-Type: application/json
-Authorization: Bereer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzLCJ1c2VybmFtZSI6IldpamRhbjEyMyIsInJvbGUiOiJwdWJsaWMiLCJpYXQiOjE3NDU0Nzk3OTgsImV4cCI6MTc0NTQ3OTgxOH0.V41X57ln9ZF-3tN6XY766A0Vw9170nwt7Nf6HNQFwpE
+Authorization: Bereer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDU2MzgxMzMsImV4cCI6MTc0NTYzODE1M30.kcBVQV0Ub8qdlsvJzdAUDZ2_VsL_pod2Zq9BhpiRLes
+
+{
+  "task": "Test Ubah",
+  "deadline": "2025-05-05T20:00:00.000Z"
+}
+
 
 ###
 # Refresh Token 
@@ -15,6 +21,6 @@ POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-  "username" : "Wijdan123",
-  "password" : "Wijdan123"
+  "username" : "Admin123",
+  "password" : "Admin123"
 }

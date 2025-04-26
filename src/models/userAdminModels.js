@@ -288,8 +288,8 @@ const updateMarkIntern = async (id_user, data) => {
     where: {
       userId_taskId: {
         userId: id_user,
-        taskId: data.taskId
-      }
+        taskId: data.taskId,
+      },
     },
     update: {
       mark: data.mark,
@@ -299,6 +299,34 @@ const updateMarkIntern = async (id_user, data) => {
       taskId: data.taskId,
       mark: data.mark,
     },
+  });
+  return result;
+};
+
+const getTask = async () => {
+  const result = await prisma.task.findMany({
+    select: {
+      id_task: true,
+      task_title: true,
+      task_deadline: true,
+    },
+  });
+  return result;
+};
+
+const createTask = async (data) => {
+  const result = await prisma.task.create({
+    data: data,
+  });
+  return result;
+};
+
+const updateTask = async (id_task, data) => {
+  const result = await prisma.task.update({
+    where: {
+      id_task: id_task,
+    },
+    data: data,
   });
   return result;
 };
@@ -317,6 +345,9 @@ module.exports = {
   approveNews,
   getMarkIntern,
   updateMarkIntern,
+  getTask,
+  createTask,
+  updateTask,
   // Control Account
   getControlAccount,
   updateControlAccount,

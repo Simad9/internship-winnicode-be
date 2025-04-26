@@ -337,6 +337,60 @@ const updateMarkIntern = async (req, res) => {
   }
 };
 
+const getTask = async (req, res) => {
+  try {
+    const data = await Admin.getTask();
+    res.status(200).json({
+      message: "Data berhasil ditarik",
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
+const createTask = async (req, res) => {
+  try {
+    const dataForm = {
+      task_title: req.body.task,
+      task_deadline: req.body.deadline,
+    };
+    const data = await Admin.createTask(dataForm);
+    res.status(200).json({
+      message: "Data berhasil ditambah",
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
+const updateTask = async (req, res) => {
+  try {
+    const id_task = parseInt(req.params.id_task);
+    const dataForm = {
+      task_title: req.body.task,
+      task_deadline: req.body.deadline,
+    };
+    const data = await Admin.updateTask(id_task, dataForm);
+    res.status(200).json({
+      message: "Data berhasil diperbarui",
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   dashboardAdmin,
   approveReqCategory,
@@ -346,6 +400,9 @@ module.exports = {
   updateReviewNews,
   markIntern,
   updateMarkIntern,
+  getTask,
+  createTask,
+  updateTask,
   // Control Account
   controlAccount,
   updateControlAccount,
