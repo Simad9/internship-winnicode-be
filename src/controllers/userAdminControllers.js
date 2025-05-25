@@ -272,7 +272,6 @@ const updateUsersAccount = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: await bcrypt.hashSync(req.body.password, salt),
-
     };
     if (req.file) {
       dataForm.profile_picture = await validasiUploadImage(

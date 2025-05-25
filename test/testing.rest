@@ -1,12 +1,25 @@
 ### Edit Akun
-GET http://localhost:5000/api/admin/task/
+PUT http://localhost:5000/api/admin/mark-intern/4
 Content-Type: application/json
-Authorization: Bereer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDU2MzgxMzMsImV4cCI6MTc0NTYzODE1M30.kcBVQV0Ub8qdlsvJzdAUDZ2_VsL_pod2Zq9BhpiRLes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDY4NjMyNTIsImV4cCI6MTc0Njg2MzI3Mn0.GcTJ8-kjLQv2Vj6D6I4axppAuS_hmf39WdopRZPqNzQ
 
 {
-  "task": "Test Ubah",
-  "deadline": "2025-05-05T20:00:00.000Z"
+  "marks": [
+    {
+      "taskId": 1,
+      "mark": 80
+    },
+    {
+      "taskId": 2,
+      "mark": 90
+    },
+    {
+      "taskId": 3,
+      "mark": 75
+    }
+  ]
 }
+
 
 
 ###
