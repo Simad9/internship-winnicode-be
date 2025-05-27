@@ -19,6 +19,7 @@ const register = async (req, res) => {
       username,
       email,
       password: hashPassword,
+      profile_picture: "https://sumbatengahkab.go.id/wp-content/uploads/2016/08/dummy-prod-1.jpg",
     });
 
     res.status(200).json({
@@ -70,7 +71,13 @@ const login = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
     return res.json({
+      message: "Login Berhasil",
       accessToken,
+      data: {
+        id_user: data.id_user,
+        name: data.name,
+        photo: data.profile_picture
+      },
     });
   } catch (error) {
     res.status(500).json({
