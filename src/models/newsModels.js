@@ -97,6 +97,23 @@ const pageNews = async (page, pagesSize) => {
   const news = await prisma.news.findMany({
     skip: (page - 1) * pagesSize,
     take: pagesSize,
+    select: {
+      id_news: true,
+      title: true,
+      content: true,
+      image: true,
+      created_at: true,
+      category: {
+        select: {
+          category: true,
+        },
+      },
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
     orderBy: {
       created_at: "desc",
     },

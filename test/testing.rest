@@ -1,24 +1,10 @@
 ### Edit Akun
-PUT http://localhost:5000/api/admin/mark-intern/4
+GET http://localhost:5000/api/news/page?page=1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDY4NjMyNTIsImV4cCI6MTc0Njg2MzI3Mn0.GcTJ8-kjLQv2Vj6D6I4axppAuS_hmf39WdopRZPqNzQ
 
-{
-  "marks": [
-    {
-      "taskId": 1,
-      "mark": 80
-    },
-    {
-      "taskId": 2,
-      "mark": 90
-    },
-    {
-      "taskId": 3,
-      "mark": 75
-    }
-  ]
-}
+
+
 
 
 
