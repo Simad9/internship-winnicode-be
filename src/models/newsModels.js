@@ -146,8 +146,10 @@ const getNewsDetailById = async (id_news) => {
       },
       author: {
         select: {
+          id_user: true,
           name: true,
           internship_date: true,
+          profile_picture: true
         },
       },
     },
@@ -193,6 +195,7 @@ const getNewsComments = async (id_news) => {
       user: {
         select: {
           name: true, // Hanya mengambil kolom 'name' dari User
+          profile_picture: true,
         },
       },
     },

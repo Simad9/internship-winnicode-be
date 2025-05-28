@@ -56,10 +56,11 @@ const detailNews = async (req, res) => {
   const newsId = parseInt(req.params.id_news);
   try {
     // Menjalankan 4 query secara paralel
-    const [detailNews, countLike, countComment, comments] = await Promise.all([
+    const [detailNews, countLike, countComment, likedNews, comments] = await Promise.all([
       News.getNewsDetailById(newsId),
       News.getCountNewsLikes(newsId),
       News.getCountNewsComments(newsId),
+      News.mostLikedNews(),
       News.getNewsComments(newsId),
     ]);
 
@@ -67,6 +68,7 @@ const detailNews = async (req, res) => {
       detailNews,
       countLike,
       countComment,
+      likedNews,
       comments,
     });
   } catch (error) {
@@ -103,7 +105,7 @@ const searchNews = async (req, res) => {
   const pageSize = 12;
   try {
     const data = await News.searchNews(keyword, page, pageSize);
-    const totalNews = await News.totalNews();
+    const totalNews = data.length;
     const totalPages = Math.ceil(totalNews / pageSize);
 
     res.status(200).json({
