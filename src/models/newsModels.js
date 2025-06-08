@@ -259,6 +259,8 @@ const internNewsAuthor = async (id_user) => {
           university: true,
           major: true,
           internship_date: true,
+          profile_picture: true,
+          role: true,
         },
       },
     },

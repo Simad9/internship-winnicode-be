@@ -19,7 +19,8 @@ const register = async (req, res) => {
       username,
       email,
       password: hashPassword,
-      profile_picture: "https://sumbatengahkab.go.id/wp-content/uploads/2016/08/dummy-prod-1.jpg",
+      profile_picture:
+        "https://sumbatengahkab.go.id/wp-content/uploads/2016/08/dummy-prod-1.jpg",
     });
 
     res.status(200).json({
@@ -65,18 +66,21 @@ const login = async (req, res) => {
     // Update Refresh Token + Cookie
     await Auth.updateById(data.id_user, { refresh_token: refreshToken });
 
-    // Response
+    // Set Cookie
     res.cookie("refreshCookie", refreshToken, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
+
+    // Response
     return res.json({
       message: "Login Berhasil",
       accessToken,
       data: {
         id_user: data.id_user,
         name: data.name,
-        photo: data.profile_picture
+        photo: data.profile_picture,
+        role: data.role,
       },
     });
   } catch (error) {

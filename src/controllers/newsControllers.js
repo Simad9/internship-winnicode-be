@@ -56,13 +56,14 @@ const detailNews = async (req, res) => {
   const newsId = parseInt(req.params.id_news);
   try {
     // Menjalankan 4 query secara paralel
-    const [detailNews, countLike, countComment, likedNews, comments] = await Promise.all([
-      News.getNewsDetailById(newsId),
-      News.getCountNewsLikes(newsId),
-      News.getCountNewsComments(newsId),
-      News.mostLikedNews(),
-      News.getNewsComments(newsId),
-    ]);
+    const [detailNews, countLike, countComment, likedNews, comments] =
+      await Promise.all([
+        News.getNewsDetailById(newsId),
+        News.getCountNewsLikes(newsId),
+        News.getCountNewsComments(newsId),
+        News.mostLikedNews(),
+        News.getNewsComments(newsId),
+      ]);
 
     res.status(200).json({
       detailNews,
@@ -87,14 +88,23 @@ const internNews = async (req, res) => {
       News.internNewsAuthor(userId),
     ]);
 
-    if (!internNews || !internNewsAuthor)
-      res.status(404).json({ message: "Data Tidak Ditemukan" });
+    if (!internNews || !internNewsAuthor) {
+      return res.status(404).json({ message: "Data Tidak Ditemukan" });
+    }
+
+    const role = internNewsAuthor.author.role;
+    if (role != "intern") {
+      return res.status(404).json({ message: "Data Tidak Ditemukan" });
+    }
+
     res.status(200).json({
       internNews,
       internNewsAuthor,
     });
   } catch (error) {
-    res.status(500).json({ message: "Terjadi Kesalahan", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Terjadi Kesalahan", error: error.message });
   }
 };
 
