@@ -86,8 +86,25 @@ const updateUser = async (req, res) => {
   }
 };
 
+const getUserByUsername = async (req, res) => {
+  try {
+    const username = req.params.username;
+    const user = await User.getUserByUsername(username);
+    res.status(200).json({
+      message: "Data berhasil ditarik",
+      data: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+}
+
 module.exports = {
   getUsers,
   getUserById,
   updateUser,
+  getUserByUsername
 };

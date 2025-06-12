@@ -14,6 +14,9 @@ const getUserIntern = async (id_user) => {
       password: true,
       role: true,
       profile_picture: true,
+      internship_date: true,
+      major: true,
+      university: true,
     },
   });
   return result;

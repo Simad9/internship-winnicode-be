@@ -7,6 +7,7 @@ const authRoute = require("./authRoutes");
 const userPublicRoutes = require("./userPublicRoutes");
 const userInternRoutes = require("./userInternRoutes");
 const userAdminRoutes = require("./userAdminRoutes");
+const tambahanRoute = require("./tambahanRoutes");
 
 // === Halaman Auth ===
 router.use("/", authRoute);
@@ -22,5 +23,8 @@ router.use("/intern", userInternRoutes);
 
 // Halaman User Admin
 router.use("/admin", userAdminRoutes);
+
+// Tambahan
+router.use("", tambahanRoute);
 
 module.exports = router;

@@ -34,8 +34,18 @@ const updateUser = async (userId, data) => {
   return result;
 };
 
+const getUserByUsername = async (username) => {
+  const result = await prisma.user.findFirst({
+    where: {
+      username: username,
+    },
+  });
+  return result;
+};
+
 module.exports = {
   getUsers,
   getUserById,
   updateUser,
+  getUserByUsername
 };
