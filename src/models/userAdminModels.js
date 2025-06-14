@@ -8,6 +8,7 @@ const getUserAdmin = async (userId) => {
     },
     select: {
       id_user: true,
+      username: true,
       name: true,
       email: true,
       role: true,
@@ -67,6 +68,7 @@ const getAllCategory = async () => {
       status: "accepted",
     },
     select: {
+      id_category: true,
       category: true,
     },
   });

@@ -43,9 +43,10 @@ const approveReqCategory = async (req, res) => {
   try {
     const id_category = parseInt(req.params.id_category);
     const data = await Admin.approveReqCategory(id_category);
+
     res.status(200).json({
       message: "Berhasil menyetujui kategori",
-      data: data,
+      data,
     });
   } catch (error) {
     res.status(500).json({
@@ -58,10 +59,10 @@ const approveReqCategory = async (req, res) => {
 const deleteReqCategory = async (req, res) => {
   try {
     const id_category = parseInt(req.params.id_category);
-    const data = await Admin.deleteReqCategory(id_category);
+    await Admin.deleteReqCategory(id_category);
+
     res.status(200).json({
       message: "Berhasil menghapus kategori",
-      data: data,
     });
   } catch (error) {
     res.status(500).json({
