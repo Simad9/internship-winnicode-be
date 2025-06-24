@@ -179,6 +179,7 @@ const getControlAccount = async () => {
       id_user: true,
       profile_picture: true,
       name: true,
+      username: true,
       email: true,
       role: true,
     },
@@ -277,7 +278,6 @@ const getMarkIntern = async (id_user) => {
       userId: id_user,
     },
     select: {
-      id_user: true,
       taskId: true,
       mark: true,
     },
@@ -307,6 +307,20 @@ const updateMarkIntern = async (id_user, data) => {
 
 const getTask = async () => {
   const result = await prisma.task.findMany({
+    select: {
+      id_task: true,
+      task_title: true,
+      task_deadline: true,
+    },
+  });
+  return result;
+};
+
+const getTaskById = async (id_task) => {
+  const result = await prisma.task.findUnique({
+    where: {
+      id_task: id_task,
+    },
     select: {
       id_task: true,
       task_title: true,
@@ -348,6 +362,7 @@ module.exports = {
   getMarkIntern,
   updateMarkIntern,
   getTask,
+  getTaskById,
   createTask,
   updateTask,
   // Control Account

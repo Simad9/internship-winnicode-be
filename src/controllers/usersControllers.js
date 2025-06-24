@@ -19,7 +19,7 @@ const getUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const userId = req.params.id_user;
+    const userId = parseInt(req.params.id_user);
     const user = await User.getUserById(userId);
     res.status(200).json({
       message: "Data berhasil ditarik",
@@ -100,11 +100,11 @@ const getUserByUsername = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
 
 module.exports = {
   getUsers,
   getUserById,
   updateUser,
-  getUserByUsername
+  getUserByUsername,
 };

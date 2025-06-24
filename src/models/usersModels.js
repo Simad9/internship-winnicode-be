@@ -19,6 +19,9 @@ const getUserById = async (userId) => {
       password: true,
       role: true,
       profile_picture: true,
+      major: true,
+      university: true,
+      internship_date: true
     },
   });
   return result;
@@ -37,7 +40,10 @@ const updateUser = async (userId, data) => {
 const getUserByUsername = async (username) => {
   const result = await prisma.user.findFirst({
     where: {
-      username: username,
+      OR: [
+        { username: username },
+        { name: username },
+      ]
     },
   });
   return result;

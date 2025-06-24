@@ -1,11 +1,11 @@
 ### Edit Akun
-GET http://localhost:5000/api/news/page?page=1
+GET http://localhost:5000/api/admin/mark-intern/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDY4NjMyNTIsImV4cCI6MTc0Njg2MzI3Mn0.GcTJ8-kjLQv2Vj6D6I4axppAuS_hmf39WdopRZPqNzQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksInVzZXJuYW1lIjoiQWRtaW4xMjMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTA3NDQzOTQsImV4cCI6MTc1MDc0NDQxNH0.G9klaQkhOlYHC4DUQVYz_gqGf6B-JmjuJLqSAsZU7Lk
 
-
-
-
+### Edit Akun
+GET http://localhost:5000/api/getUserById/9
+Content-Type: application/json
 
 
 ###

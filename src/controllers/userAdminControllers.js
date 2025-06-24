@@ -312,15 +312,17 @@ const deleteUsersAccount = async (req, res) => {
 const markIntern = async (req, res) => {
   try {
     const id_user = parseInt(req.params.id_user);
-    const [dataIntern, dataMarkIntern] = await Promise.all([
+    const [dataIntern, dataMarkIntern, dataTasks] = await Promise.all([
       User.getUserById(id_user),
       Admin.getMarkIntern(id_user),
+      Admin.getTask(),
     ]);
     res.status(200).json({
       message: "Data berhasil ditambah",
       data: {
         dataIntern,
         dataMarkIntern,
+        dataTasks,
       },
     });
   } catch (error) {
@@ -356,6 +358,22 @@ const updateMarkIntern = async (req, res) => {
 const getTask = async (req, res) => {
   try {
     const data = await Admin.getTask();
+    res.status(200).json({
+      message: "Data berhasil ditarik",
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Terjadi Kesalahan",
+      error: error.message,
+    });
+  }
+};
+
+const getTaskById = async (req, res) => {
+  const id_task = parseInt(req.params.id_task);
+  try {
+    const data = await Admin.getTaskById(id_task);
     res.status(200).json({
       message: "Data berhasil ditarik",
       data: data,
@@ -417,6 +435,7 @@ module.exports = {
   markIntern,
   updateMarkIntern,
   getTask,
+  getTaskById,
   createTask,
   updateTask,
   // Control Account

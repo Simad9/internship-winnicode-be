@@ -136,6 +136,12 @@ router.get(
   checkRole(requireRole),
   userAdminController.getTask
 );
+router.get(
+  "/task/:id_task",
+  verifyToken,
+  checkRole(requireRole),
+  userAdminController.getTaskById
+);
 router.post(
   "/task",
   verifyToken,
