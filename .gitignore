@@ -1,6 +1,33 @@
-# Keep environment variables out of version control
+# Environment variables
 .env
+.env.local
+.env.*.local
 
-# Node Modules - "npm install"
+# Node modules & dependencies
+node_modules/
 /node_modules
 
+# Local upload & temporary files (Multer / Cloud)
+uploads/*
+!uploads/.gitkeep
+tmp/
+temp/
+
+# Logs & Debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Prisma generated client artifacts (if customized)
+/generated
+
+# OS & IDE Junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# PRIBADI
+/#belajar
