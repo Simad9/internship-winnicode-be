@@ -1,12 +1,11 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
-const register = async (data) => {
+export const register = async (data) => {
   const result = await prisma.user.create({ data });
   return result;
 };
 
-const usernameOrEmailExists = async (username, email) => {
+export const usernameOrEmailExists = async (username, email) => {
   const result = await prisma.user.findFirst({
     where: {
       OR: [{ username: username }, { email: email }],
@@ -15,7 +14,7 @@ const usernameOrEmailExists = async (username, email) => {
   return result;
 };
 
-const updateById = async (id, data) => {
+export const updateById = async (id, data) => {
   const result = await prisma.user.update({
     where: {
       id_user: id,
@@ -25,7 +24,7 @@ const updateById = async (id, data) => {
   return result;
 };
 
-const byRefreshToken = async (refreshToken) => {
+export const byRefreshToken = async (refreshToken) => {
   const result = await prisma.user.findFirst({
     where: {
       refresh_token: refreshToken,
@@ -34,7 +33,7 @@ const byRefreshToken = async (refreshToken) => {
   return result;
 };
 
-module.exports = {
+export default {
   register,
   usernameOrEmailExists,
   updateById,

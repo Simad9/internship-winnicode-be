@@ -1,37 +1,30 @@
-// prisma/seed.ts
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../src/lib/prisma.js";
 
 // seeder
-const { seedCategory } = require("./seeder/categorySeeder");
-const { seedUser } = require("./seeder/userSeeder");
-const { seedTask } = require("./seeder/taskSeeder");
-const { seedNews } = require("./seeder/newsSeeder");
-const { seedLike } = require("./seeder/likeSeeder");
-const { commentSeeder } = require("./seeder/commentSeeder");
+import { seedCategory } from "./seeder/categorySeeder.js";
+import { seedUser } from "./seeder/userSeeder.js";
+import { seedTask } from "./seeder/taskSeeder.js";
+import { seedNews } from "./seeder/newsSeeder.js";
+import { seedLike } from "./seeder/likeSeeder.js";
+import { commentSeeder } from "./seeder/commentSeeder.js";
 
-// main
 async function main() {
-  // Hapus Data
-  // await prisma.category.deleteMany();
-  // await prisma.task.deleteMany();
-  // await prisma.user.deleteMany();
-  // await prisma.news.deleteMany();
-  // await prisma.like.deleteMany();
-  // await prisma.comment.deleteMany();
+  console.log("Starting idempotent seed process...");
 
-  // Seeder
-  // await seedCategory();
-  // await seedTask();
-  // await seedUser();
-  // await seedNews();
-  // await seedLike();
-  // await commentSeeder();
+  await seedCategory();
+  await seedTask();
+  await seedUser();
+  await seedNews();
+  await seedLike();
+  await commentSeeder();
+
+  console.log("All seeders processed (existing data skipped) 🌱");
 }
 
 main()
   .catch((e) => {
-    throw e;
+    console.error("Error running seeder:", e);
+    process.exit(1);
   })
   .finally(async () => {
     await prisma.$disconnect();

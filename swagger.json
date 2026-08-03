@@ -1,0 +1,261 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Internship Portal Backend API",
+    "description": "Dokumentasi RESTful API Backend untuk Sistem Manajemen Portal Magang & Berita berbasis Express.js, Prisma ORM, dan PostgreSQL.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Development Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/api/register": {
+      "post": {
+        "summary": "Registrasi Pengguna Baru",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string", "example": "John Doe" },
+                  "username": { "type": "string", "example": "johndoe" },
+                  "email": { "type": "string", "example": "johndoe@example.com" },
+                  "password": { "type": "string", "example": "password123" },
+                  "confirm_password": { "type": "string", "example": "password123" }
+                },
+                "required": ["name", "username", "email", "password", "confirm_password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Registrasi berhasil" },
+          "400": { "description": "Password tidak cocok" },
+          "500": { "description": "Terjadi kesalahan server" }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "summary": "Login Pengguna",
+        "tags": ["Auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string", "example": "johndoe" },
+                  "email": { "type": "string", "example": "johndoe@example.com" },
+                  "password": { "type": "string", "example": "password123" }
+                },
+                "required": ["password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login Berhasil" },
+          "400": { "description": "Password Salah" },
+          "404": { "description": "User tidak ditemukan" }
+        }
+      }
+    },
+    "/api/token": {
+      "get": {
+        "summary": "Refresh Access Token",
+        "tags": ["Auth"],
+        "responses": {
+          "200": { "description": "Berhasil memperbarui access token" },
+          "401": { "description": "Cookie refresh token tidak ditemukan" },
+          "403": { "description": "Token tidak valid" }
+        }
+      }
+    },
+    "/api/logout": {
+      "delete": {
+        "summary": "Logout Pengguna",
+        "tags": ["Auth"],
+        "responses": {
+          "200": { "description": "Logout Berhasil" },
+          "204": { "description": "Cookie tidak ditemukan / User tidak ditemukan" }
+        }
+      }
+    },
+    "/api/news": {
+      "get": {
+        "summary": "Home Page Berita (3 Berita Terbaru, Top Liked, 9 Home News)",
+        "tags": ["News"],
+        "responses": {
+          "200": { "description": "Berhasil mendapatkan data home page" }
+        }
+      }
+    },
+    "/api/news/page": {
+      "get": {
+        "summary": "Daftar Berita dengan Pagination",
+        "tags": ["News"],
+        "parameters": [
+          { "name": "page", "in": "query", "schema": { "type": "integer", "default": 1 } }
+        ],
+        "responses": {
+          "200": { "description": "Berhasil mengambil berita dengan pagination" }
+        }
+      }
+    },
+    "/api/news/search": {
+      "get": {
+        "summary": "Pencarian Berita berdasarkan Keyword",
+        "tags": ["News"],
+        "parameters": [
+          { "name": "q", "in": "query", "schema": { "type": "string" }, "description": "Keyword pencarian" },
+          { "name": "page", "in": "query", "schema": { "type": "integer", "default": 1 } }
+        ],
+        "responses": {
+          "200": { "description": "Hasil pencarian berita" }
+        }
+      }
+    },
+    "/api/news/{id_news}": {
+      "get": {
+        "summary": "Detail Berita berdasarkan ID",
+        "tags": ["News"],
+        "parameters": [
+          { "name": "id_news", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": { "description": "Detail berita ditemukan" }
+        }
+      }
+    },
+    "/api/public/dashboard": {
+      "get": {
+        "summary": "Dashboard User Public",
+        "tags": ["Public"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Data dashboard user public" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Role tidak sesuai" }
+        }
+      }
+    },
+    "/api/intern/dashboard": {
+      "get": {
+        "summary": "Dashboard Peserta Magang (Intern)",
+        "tags": ["Intern"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Data dashboard intern" },
+          "403": { "description": "Forbidden" }
+        }
+      }
+    },
+    "/api/intern/write-news": {
+      "post": {
+        "summary": "Menulis Berita Baru (Intern)",
+        "tags": ["Intern"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskId": { "type": "integer" },
+                  "categoryId": { "type": "integer" },
+                  "title": { "type": "string" },
+                  "content": { "type": "string" },
+                  "req_category": { "type": "string" },
+                  "image": { "type": "string", "format": "binary" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Berhasil menulis berita" }
+        }
+      }
+    },
+    "/api/admin/dashboard": {
+      "get": {
+        "summary": "Dashboard Admin",
+        "tags": ["Admin"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Data dashboard admin" }
+        }
+      }
+    },
+    "/api/admin/pending-news": {
+      "get": {
+        "summary": "Daftar Berita Pending (Admin)",
+        "tags": ["Admin"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Daftar berita status pending" }
+        }
+      }
+    },
+    "/api/admin/control-account": {
+      "get": {
+        "summary": "Daftar Kontrol Akun Pengguna (Admin)",
+        "tags": ["Admin"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Daftar akun pengguna" }
+        }
+      }
+    },
+    "/api/admin/task": {
+      "get": {
+        "summary": "Daftar Tugas Magang (Admin)",
+        "tags": ["Admin"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Daftar tugas magang" }
+        },
+        "post": {
+          "summary": "Membuat Tugas Magang Baru (Admin)",
+          "tags": ["Admin"],
+          "security": [{ "bearerAuth": [] }],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "task_title": { "type": "string" },
+                    "task_deadline": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": { "description": "Tugas berhasil dibuat" }
+          }
+        }
+      }
+    }
+  }
+}

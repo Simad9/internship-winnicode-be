@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
 // HomePage = 3 Berita Terabaru
 const threeNewNews = async () => {
@@ -297,7 +296,23 @@ const searchNews = async (keyword, page, pagesSize) => {
   return news;
 };
 
-module.exports = {
+export {
+  threeNewNews,
+  mostLikedNews,
+  homeNews,
+  pageNews,
+  totalNews,
+  getNewsDetailById,
+  getCountNewsLikes,
+  getCountNewsComments,
+  getNewsComments,
+  addCommentInNews,
+  internNews,
+  internNewsAuthor,
+  searchNews,
+};
+
+export default {
   threeNewNews,
   mostLikedNews,
   homeNews,

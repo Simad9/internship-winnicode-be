@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../../src/lib/prisma.js";
 
 const commentSeeder = async () => {
   const comments = [
@@ -20,12 +19,21 @@ const commentSeeder = async () => {
     }, 
   ];
   for (const comment of comments) {
-    await prisma.comment.create({
-      data: comment,
+    const exists = await prisma.comment.findFirst({
+      where: {
+        newsId: comment.newsId,
+        userId: comment.userId,
+        comment: comment.comment,
+      },
     });
+    if (!exists) {
+      await prisma.comment.create({
+        data: comment,
+      });
+    }
   }
 
-  console.log("Comments seeded successfully.");
+  console.log("Comments seeded (existing skipped).");
 };
 
-module.exports = { commentSeeder };
+export { commentSeeder };

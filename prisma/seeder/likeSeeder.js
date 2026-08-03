@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../../src/lib/prisma.js";
 
 const seedLike = async () => {
   const likes = [
@@ -38,12 +37,17 @@ const seedLike = async () => {
   ];
 
   for (const like of likes) {
-    await prisma.like.create({
-      data: like,
+    const exists = await prisma.like.findFirst({
+      where: { newsId: like.newsId, userId: like.userId },
     });
+    if (!exists) {
+      await prisma.like.create({
+        data: like,
+      });
+    }
   }
 
-  console.log("Likes seeded successfully.");
+  console.log("Likes seeded (existing skipped).");
 };
 
-module.exports = { seedLike };
+export { seedLike };

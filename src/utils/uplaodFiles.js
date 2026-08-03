@@ -1,11 +1,9 @@
-// utils/uploadFile.js
-const cloudinary = require("../lib/cloudinary");
+import cloudinary from "../lib/cloudinary.js";
 
 const uploadToCloudServiceProfilePicture = async (filePath, isImageNews) => {
   try {
-    // Upload ke Claudinary
     const result = await cloudinary.uploader.upload(filePath, {
-      folder: "magang-portal-berita", // opsional: nama folder di Cloudinary
+      folder: "magang-portal-berita",
     });
 
     const optimizeUrl = cloudinary.url(result.public_id, {
@@ -16,11 +14,10 @@ const uploadToCloudServiceProfilePicture = async (filePath, isImageNews) => {
       width: isImageNews === "news" ? 1000 : 500,
       height: isImageNews === "news" ? 600 : 500,
     });
-    return optimizeUrl; // URL file
-    
+    return optimizeUrl;
   } catch (error) {
     throw new Error("Gagal upload ke Cloudinary: " + error.message);
   }
 };
 
-module.exports = uploadToCloudServiceProfilePicture;
+export default uploadToCloudServiceProfilePicture;

@@ -6,8 +6,8 @@ const checkRole = (requiredRole) => {
       return res.status(403).json({ message: "Forbidden: Role tidak sesuai" });
     }
 
-    next(); // lanjut ke route berikutnya
+    next();
   };
 };
 
-module.exports = checkRole;
+export default checkRole;

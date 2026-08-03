@@ -1,167 +1,43 @@
-const express = require("express");
+import express from "express";
+import multer from "multer";
+import verifyToken from "../middlewares/verifyToken.js";
+import checkRole from "../middlewares/checkRole.js";
+import usersController from "../controllers/usersControllers.js";
+import userAdminController from "../controllers/userAdminControllers.js";
+
 const router = express.Router();
-const multer = require("multer");
-
-// Middlewares
-const verifyToken = require("../middlewares/verifyToken");
-const checkRole = require("../middlewares/checkRole");
-const upload = multer({ dest: "uploads/" }); // folder penyimpanan file
-
-// Controllers
-const usersController = require("../controllers/usersControllers");
-const userAdminController = require("../controllers/userAdminControllers");
-
-// Role
+const upload = multer({ dest: "uploads/" });
 const requireRole = "admin";
 
-// Page : Admin - Dashboard
-router.get(
-  "/dashboard",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.dashboardAdmin
-);
-router.put(
-  "/dashboard/approve-category/:id_category",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.approveReqCategory
-);
-router.delete(
-  "/dashboard/delete-category/:id_category",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.deleteReqCategory
-);
+router.get("/dashboard", verifyToken, checkRole(requireRole), userAdminController.dashboardAdmin);
+router.put("/dashboard/approve-category/:id_category", verifyToken, checkRole(requireRole), userAdminController.approveReqCategory);
+router.delete("/dashboard/delete-category/:id_category", verifyToken, checkRole(requireRole), userAdminController.deleteReqCategory);
 
-// Page : Admin - Pending News
-router.get(
-  "/pending-news",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.pendingNews
-);
+router.get("/pending-news", verifyToken, checkRole(requireRole), userAdminController.pendingNews);
 
-// Page : Admin - Review News
-router.get(
-  "/review-news/:id_news",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.reviewNews
-);
-router.put(
-  "/review-news/:id_news",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.updateReviewNews
-);
+router.get("/review-news/:id_news", verifyToken, checkRole(requireRole), userAdminController.reviewNews);
+router.put("/review-news/:id_news", verifyToken, checkRole(requireRole), userAdminController.updateReviewNews);
 
-// Page : Admin - Kontrol Akun
-router.get(
-  "/control-account",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.controlAccount
-);
-router.put(
-  "/control-account/:id_user",
-  verifyToken,
-  checkRole(requireRole),
-  upload.single("profile_picture"),
-  userAdminController.updateControlAccount
-);
-router.delete(
-  "/control-account/:id_user",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.deleteControlAccount
-);
-router.get(
-  "/control-account/intern",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.internsAccount
-);
-router.put(
-  "/control-account/intern/:id_user",
-  verifyToken,
-  checkRole(requireRole),
-  upload.single("profile_picture"),
-  userAdminController.updateInternsAccount
-);
-router.delete(
-  "/control-account/intern/:id_user",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.deleteInternsAccount
-);
-router.get(
-  "/control-account/user",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.usersAccount
-);
-router.put(
-  "/control-account/user/:id_user",
-  verifyToken,
-  checkRole(requireRole),
-  upload.single("profile_picture"),
-  userAdminController.updateUsersAccount
-);
-router.delete(
-  "/control-account/user/:id_user",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.deleteUsersAccount
-);
+router.get("/control-account", verifyToken, checkRole(requireRole), userAdminController.controlAccount);
+router.put("/control-account/:id_user", verifyToken, checkRole(requireRole), upload.single("profile_picture"), userAdminController.updateControlAccount);
+router.delete("/control-account/:id_user", verifyToken, checkRole(requireRole), userAdminController.deleteControlAccount);
 
-// Page : Admin - Menlai Anak Magang
-router.get(
-  "/mark-intern/:id_user",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.markIntern
-);
-router.put(
-  "/mark-intern/:id_user",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.updateMarkIntern
-);
+router.get("/control-account/intern", verifyToken, checkRole(requireRole), userAdminController.internsAccount);
+router.put("/control-account/intern/:id_user", verifyToken, checkRole(requireRole), upload.single("profile_picture"), userAdminController.updateInternsAccount);
+router.delete("/control-account/intern/:id_user", verifyToken, checkRole(requireRole), userAdminController.deleteInternsAccount);
 
-//Page : Admin - Edit Tugas
-router.get(
-  "/task",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.getTask
-);
-router.get(
-  "/task/:id_task",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.getTaskById
-);
-router.post(
-  "/task",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.createTask
-);
-router.put(
-  "/task/:id_task",
-  verifyToken,
-  checkRole(requireRole),
-  userAdminController.updateTask
-);
+router.get("/control-account/user", verifyToken, checkRole(requireRole), userAdminController.usersAccount);
+router.put("/control-account/user/:id_user", verifyToken, checkRole(requireRole), upload.single("profile_picture"), userAdminController.updateUsersAccount);
+router.delete("/control-account/user/:id_user", verifyToken, checkRole(requireRole), userAdminController.deleteUsersAccount);
 
-// Page : Admin - Edit User
-router.put(
-  "/edit-account",
-  verifyToken,
-  checkRole(requireRole),
-  upload.single("profile_picture"),
-  usersController.updateUser
-);
+router.get("/mark-intern/:id_user", verifyToken, checkRole(requireRole), userAdminController.markIntern);
+router.put("/mark-intern/:id_user", verifyToken, checkRole(requireRole), userAdminController.updateMarkIntern);
 
-module.exports = router;
+router.get("/task", verifyToken, checkRole(requireRole), userAdminController.getTask);
+router.get("/task/:id_task", verifyToken, checkRole(requireRole), userAdminController.getTaskById);
+router.post("/task", verifyToken, checkRole(requireRole), userAdminController.createTask);
+router.put("/task/:id_task", verifyToken, checkRole(requireRole), userAdminController.updateTask);
+
+router.put("/edit-account", verifyToken, checkRole(requireRole), upload.single("profile_picture"), usersController.updateUser);
+
+export default router;

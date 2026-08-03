@@ -1,34 +1,36 @@
-const fs = require("fs");
-const path = require("path");
-const uploadToCloudService = require("./uplaodFiles");
+import fs from "fs";
+import path from "path";
+import uploadToCloudService from "./uplaodFiles.js";
 
-const validasiUploadImage = async (fileInput, isImageNews) => {
+const validasiUploadImage = async (fileInput, isImageNews, res) => {
   try {
     const tempPath = fileInput.path;
     const originalName = fileInput.originalname;
 
-    // 1. Validasi
     const ext = path.extname(originalName).toLowerCase();
     if (ext !== ".jpg" && ext !== ".png" && ext !== ".jpeg") {
       fs.unlinkSync(tempPath);
-      return res.status(400).json({ message: "Format tidak didukung" });
+      if (res) return res.status(400).json({ message: "Format tidak didukung" });
+      throw new Error("Format tidak didukung");
     }
     if (fileInput.size > 5000000) {
       fs.unlinkSync(tempPath);
-      return res.status(400).json({ message: "File harus di bawah 5MB" });
+      if (res) return res.status(400).json({ message: "File harus di bawah 5MB" });
+      throw new Error("File harus di bawah 5MB");
     }
-    // 2. Upload ke cloud (dummy logic, ganti pakai API Cloudinary, Firebase, etc.)
-    const cloudUrl = await uploadToCloudService(tempPath, isImageNews); // ini fungsi async kamu
-    // 3. Hapus file lokal
+    const cloudUrl = await uploadToCloudService(tempPath, isImageNews);
     fs.unlinkSync(tempPath);
 
     return cloudUrl;
   } catch (error) {
-    res.status(500).json({
-      message: "Terjadi Kesalahan",
-      error: error.message,
-    });
+    if (res) {
+      return res.status(500).json({
+        message: "Terjadi Kesalahan",
+        error: error.message,
+      });
+    }
+    throw error;
   }
 };
 
-module.exports = validasiUploadImage;
+export default validasiUploadImage;

@@ -1,16 +1,18 @@
-// src/app.js
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const cookieParser = require("cookie-parser");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
+import { createRequire } from "module";
+import Routes from "./routes/routes.js";
 
-// App Express
+const require = createRequire(import.meta.url);
+const swaggerDocument = require("../swagger.json");
+
 const app = express();
 
-// Dotenv
 dotenv.config();
 
-// Middlewares
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -20,11 +22,11 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 
-// Routes
-const Routes = require("./routes/routes.js");
+// Swagger Documentation Endpoint
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.use("/api/", Routes);
 
-// Default route
 app.get("/", (req, res) => {
   res.send("API is running 🚀");
 });
@@ -33,4 +35,4 @@ app.get("*", (req, res) => {
   res.send("404 - Halaman tidak ada");
 });
 
-module.exports = app;
+export default app;

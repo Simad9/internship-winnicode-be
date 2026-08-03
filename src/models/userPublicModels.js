@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
 const getUserPublic = async (userId) => {
   const result = await prisma.user.findFirst({
@@ -117,7 +116,7 @@ const deleteSaveNews = async (saveId) => {
   return result;
 };
 
-module.exports = {
+export {
   getUserPublic,
   countLikeNews,
   countSaveNews,

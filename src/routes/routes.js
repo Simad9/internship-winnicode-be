@@ -1,13 +1,12 @@
-const express = require("express");
-const router = express.Router();
+import express from "express";
+import newsRoute from "./newsRoutes.js";
+import authRoute from "./authRoutes.js";
+import userPublicRoutes from "./userPublicRoutes.js";
+import userInternRoutes from "./userInternRoutes.js";
+import userAdminRoutes from "./userAdminRoutes.js";
+import tambahanRoute from "./tambahanRoutes.js";
 
-// Routes
-const newsRoute = require("./newsRoutes");
-const authRoute = require("./authRoutes");
-const userPublicRoutes = require("./userPublicRoutes");
-const userInternRoutes = require("./userInternRoutes");
-const userAdminRoutes = require("./userAdminRoutes");
-const tambahanRoute = require("./tambahanRoutes");
+const router = express.Router();
 
 // === Halaman Auth ===
 router.use("/", authRoute);
@@ -27,4 +26,4 @@ router.use("/admin", userAdminRoutes);
 // Tambahan
 router.use("", tambahanRoute);
 
-module.exports = router;
+export default router;

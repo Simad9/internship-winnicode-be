@@ -1,7 +1,5 @@
-const Admin = require("../models/userAdminModels");
-const User = require("../models/usersModels");
-const bcrypt = require("bcrypt");
-const validasiUploadImage = require("../utils/validasiUploadImage");
+import bcrypt from "bcrypt";
+import validasiUploadImage from "../utils/validasiUploadImage.js";
 
 const dashboardAdmin = async (req, res) => {
   try {
@@ -157,7 +155,7 @@ const updateControlAccount = async (req, res) => {
     if (req.file) {
       dataForm.profile_picture = await validasiUploadImage(
         req.file,
-        "profile_picture"
+        "profile_picture",
       );
     }
     const data = await Admin.updateControlAccount(id_user, dataForm);
@@ -217,7 +215,7 @@ const updateInternsAccount = async (req, res) => {
     if (req.file) {
       dataForm.profile_picture = await validasiUploadImage(
         req.file,
-        "profile_picture"
+        "profile_picture",
       );
     }
     const data = await Admin.updateInternsAccount(id_user, dataForm);
@@ -277,7 +275,7 @@ const updateUsersAccount = async (req, res) => {
     if (req.file) {
       dataForm.profile_picture = await validasiUploadImage(
         req.file,
-        "profile_picture"
+        "profile_picture",
       );
     }
     const data = await Admin.updateUsersAccount(id_user, dataForm);
@@ -425,7 +423,7 @@ const updateTask = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   dashboardAdmin,
   approveReqCategory,
   deleteReqCategory,
@@ -438,7 +436,30 @@ module.exports = {
   getTaskById,
   createTask,
   updateTask,
-  // Control Account
+  controlAccount,
+  updateControlAccount,
+  deleteControlAccount,
+  internsAccount,
+  updateInternsAccount,
+  deleteInternsAccount,
+  usersAccount,
+  updateUsersAccount,
+  deleteUsersAccount,
+};
+
+export default {
+  dashboardAdmin,
+  approveReqCategory,
+  deleteReqCategory,
+  pendingNews,
+  reviewNews,
+  updateReviewNews,
+  markIntern,
+  updateMarkIntern,
+  getTask,
+  getTaskById,
+  createTask,
+  updateTask,
   controlAccount,
   updateControlAccount,
   deleteControlAccount,

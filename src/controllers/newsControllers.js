@@ -1,4 +1,4 @@
-const News = require("../models/newsModels");
+import News from "../models/newsModels.js";
 
 // Home Page
 const homepage = async (req, res) => {
@@ -135,10 +135,5 @@ const searchNews = async (req, res) => {
   }
 };
 
-module.exports = {
-  homepage,
-  pageNews,
-  detailNews,
-  internNews,
-  searchNews,
-};
+export { homepage, pageNews, detailNews, internNews, searchNews };
+export default { homepage, pageNews, detailNews, internNews, searchNews };

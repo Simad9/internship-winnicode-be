@@ -1,6 +1,6 @@
 # Internship Portal Backend API
 
-RESTful API Backend untuk Sistem Manajemen Portal Magang & Berita berbasis Express.js dan Prisma ORM dengan MySQL.
+RESTful API Backend untuk Sistem Manajemen Portal Magang & Berita berbasis Express.js dan Prisma ORM dengan PostgreSQL.
 
 ---
 
@@ -21,7 +21,7 @@ RESTful API Backend untuk Sistem Manajemen Portal Magang & Berita berbasis Expre
 
 - **Runtime**: Node.js
 - **Framework**: Express.js
-- **Database & ORM**: MySQL, Prisma ORM
+- **Database & ORM**: PostgreSQL, Prisma ORM
 - **Authentication**: JWT (jsonwebtoken), Cookie-parser, Bcrypt
 - **File Upload**: Multer, Cloudinary
 
@@ -43,6 +43,7 @@ intern-be/
 │   ├── routes/             # Endpoints API (auth, news, public, intern, admin)
 │   └── utils/              # Utility & Helper Functions
 ├── server.js               # Entry point utama aplikasi
+├── swagger.json            # Spesifikasi OpenAPI / Swagger Docs
 ├── Docs-dev.MD             # Catatan pengembangan backend
 └── package.json            # Dependencies & Scripts NPM
 ```
@@ -53,7 +54,7 @@ intern-be/
 
 ### 1. Prerequisites
 - Node.js (v18+ direkomendasikan)
-- MySQL Database
+- PostgreSQL Database
 
 ### 2. Cloning & Install Dependencies
 ```bash
@@ -68,7 +69,7 @@ Buat file `.env` di root direktori dan sesuaikan variabel berikut:
 ```env
 PORT=8080
 CLIENT_URL=http://localhost:3000
-DATABASE_URL="mysql://root:password@localhost:3306/intern_db"
+DATABASE_URL="postgresql://postgres:password@localhost:5432/intern_db?schema=public"
 
 JWT_SECRET=your_jwt_secret_key
 REFRESH_TOKEN_SECRET=your_refresh_token_secret_key
@@ -114,12 +115,22 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 ---
 
+## 📖 Dokumentasi API (Swagger UI)
+
+Dokumentasi interaktif OpenAPI / Swagger dapat diakses secara langsung melalui browser saat server berjalan:
+
+- **Swagger UI**: [http://localhost:8080/api-docs](http://localhost:8080/api-docs)
+- **OpenAPI Specification File**: [swagger.json](file:///D:/@Magang/WinniCode/intern-be/swagger.json)
+
+---
+
 ## 📌 Prefix Endpoints API
 
 API diakses melalui prefix `/api`:
 
 | Base Path | Role / Modul | Deskripsi |
 | :--- | :--- | :--- |
+| `/api-docs` | Docs | Swagger UI Interaktif API Documentation |
 | `/api/` | Auth | Register, Login, Refresh Token, Logout |
 | `/api/news` | News | Manajemen & Pembacaan Berita |
 | `/api/public` | Public User | Fitur pengguna umum |

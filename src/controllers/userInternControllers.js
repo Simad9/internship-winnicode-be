@@ -1,5 +1,5 @@
-const Intern = require("../models/userInternModels");
-const validasiUploadImage = require("../utils/validasiUploadImage");
+import Intern from "../models/userInternModels.js";
+import validasiUploadImage from "../utils/validasiUploadImage.js";
 
 const dashboardIntern = async (req, res) => {
   try {
@@ -106,9 +106,5 @@ const deleteNews = async (req, res) => {
   }
 };
 
-module.exports = {
-  dashboardIntern,
-  writeNews,
-  updateNews,
-  deleteNews,
-};
+export { dashboardIntern, writeNews, updateNews, deleteNews };
+export default { dashboardIntern, writeNews, updateNews, deleteNews };

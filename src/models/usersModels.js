@@ -1,12 +1,11 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
-const getUsers = async () => {
+export const getUsers = async () => {
   const users = await prisma.user.findMany();
   return users;
 };
 
-const getUserById = async (userId) => {
+export const getUserById = async (userId) => {
   const result = await prisma.user.findFirst({
     where: {
       id_user: userId,
@@ -21,13 +20,13 @@ const getUserById = async (userId) => {
       profile_picture: true,
       major: true,
       university: true,
-      internship_date: true
+      internship_date: true,
     },
   });
   return result;
 };
 
-const updateUser = async (userId, data) => {
+export const updateUser = async (userId, data) => {
   const result = await prisma.user.update({
     where: {
       id_user: userId,
@@ -37,21 +36,11 @@ const updateUser = async (userId, data) => {
   return result;
 };
 
-const getUserByUsername = async (username) => {
+export const getUserByUsername = async (username) => {
   const result = await prisma.user.findFirst({
     where: {
-      OR: [
-        { username: username },
-        { name: username },
-      ]
+      OR: [{ username: username }, { name: username }],
     },
   });
   return result;
-};
-
-module.exports = {
-  getUsers,
-  getUserById,
-  updateUser,
-  getUserByUsername
 };

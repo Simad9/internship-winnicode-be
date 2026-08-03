@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
 const getUserAdmin = async (userId) => {
   const userAdmin = await prisma.user.findFirst({
@@ -347,7 +346,7 @@ const updateTask = async (id_task, data) => {
   return result;
 };
 
-module.exports = {
+export {
   getUserAdmin,
   getPendingData,
   getTotalUser,
@@ -365,7 +364,35 @@ module.exports = {
   getTaskById,
   createTask,
   updateTask,
-  // Control Account
+  getControlAccount,
+  updateControlAccount,
+  deleteControlAccount,
+  getInternsAccount,
+  updateInternsAccount,
+  deleteInternsAccount,
+  getUsersAccount,
+  updateUsersAccount,
+  deleteUsersAccount,
+};
+
+export default {
+  getUserAdmin,
+  getPendingData,
+  getTotalUser,
+  getTotalIntern,
+  getAllCategory,
+  getReqCategory,
+  approveReqCategory,
+  deleteReqCategory,
+  getReviewNews,
+  updateReviewNews,
+  approveNews,
+  getMarkIntern,
+  updateMarkIntern,
+  getTask,
+  getTaskById,
+  createTask,
+  updateTask,
   getControlAccount,
   updateControlAccount,
   deleteControlAccount,

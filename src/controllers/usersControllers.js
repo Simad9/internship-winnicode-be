@@ -1,6 +1,5 @@
-const User = require("../models/usersModels");
-const bcrypt = require("bcrypt");
-const validasiUploadImage = require("../utils/validasiUploadImage");
+import bcrypt from "bcrypt";
+import validasiUploadImage from "../utils/validasiUploadImage.js";
 
 const getUsers = async (req, res) => {
   try {
@@ -66,7 +65,7 @@ const updateUser = async (req, res) => {
     if (req.file) {
       dataUpdate.image = await validasiUploadImage(
         fileInput,
-        "profile_picture"
+        "profile_picture",
       );
     }
 
@@ -102,9 +101,5 @@ const getUserByUsername = async (req, res) => {
   }
 };
 
-module.exports = {
-  getUsers,
-  getUserById,
-  updateUser,
-  getUserByUsername,
-};
+export { getUsers, getUserById, updateUser, getUserByUsername };
+export default { getUsers, getUserById, updateUser, getUserByUsername };

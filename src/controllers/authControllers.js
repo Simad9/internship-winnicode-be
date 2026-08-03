@@ -1,6 +1,7 @@
-const Auth = require("../models/authModels");
-const bycrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import Auth from "../models/authModels.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+const bycrypt = bcrypt;
 
 const register = async (req, res) => {
   const { name, username, email, password, confirm_password } = req.body;
@@ -153,9 +154,5 @@ const logout = async (req, res) => {
   }
 };
 
-module.exports = {
-  register,
-  login,
-  refreshToken,
-  logout,
-};
+export { register, login, refreshToken, logout };
+export default { register, login, refreshToken, logout };

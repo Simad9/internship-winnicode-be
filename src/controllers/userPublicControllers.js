@@ -1,5 +1,3 @@
-const Public = require("../models/userPublicModels");
-
 // Halaman Dashboard
 const dashboardPublic = async (req, res) => {
   const id_user = req.userId;
@@ -93,7 +91,8 @@ const deleteSaveNews = async (req, res) => {
   }
 };
 
-module.exports = {
+export { dashboardPublic, likeNews, saveNews, deleteLikeNews, deleteSaveNews };
+export default {
   dashboardPublic,
   likeNews,
   saveNews,

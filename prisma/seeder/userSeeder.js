@@ -1,6 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
-const bcrypt = require("bcrypt");
+import { prisma } from "../../src/lib/prisma.js";
+import bcrypt from "bcrypt";
 
 // Salt Password
 const salt = bcrypt.genSaltSync();
@@ -144,13 +143,20 @@ async function seedUser() {
   ];
 
   for (const user of users) {
-    await prisma.user.create({
-      data: user,
+    const exists = await prisma.user.findFirst({
+      where: {
+        OR: [{ username: user.username }, { email: user.email }],
+      },
     });
+    if (!exists) {
+      await prisma.user.create({
+        data: user,
+      });
+    }
   }
 
-  console.log("Users seeded successfully.");
+  console.log("Users seeded (existing skipped).");
 }
 
-module.exports = { seedUser };
+export { seedUser };
 

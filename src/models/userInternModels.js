@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma.js";
 
 const getUserIntern = async (id_user) => {
   const result = await prisma.user.findUnique({
@@ -141,7 +140,18 @@ const deleteNews = async (newsId) => {
   return result;
 };
 
-module.exports = {
+export {
+  getUserIntern,
+  getTaskData,
+  getPendingData,
+  getNewsAuthor,
+  writeNews,
+  updateNews,
+  deleteNews,
+  createCategory,
+};
+
+export default {
   getUserIntern,
   getTaskData,
   getPendingData,

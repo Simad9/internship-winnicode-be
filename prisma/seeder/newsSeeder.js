@@ -1,5 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+import { prisma } from "../../src/lib/prisma.js";
 
 async function seedNews() {
   const newsData = [
@@ -374,12 +373,17 @@ async function seedNews() {
   ];
 
   for (const news of newsData) {
-    await prisma.news.create({
-      data: news,
+    const exists = await prisma.news.findFirst({
+      where: { title: news.title },
     });
+    if (!exists) {
+      await prisma.news.create({
+        data: news,
+      });
+    }
   }
 
-  console.log("News seeded successfully.");
+  console.log("News seeded (existing skipped).");
 }
 
-module.exports = { seedNews };
+export { seedNews };
