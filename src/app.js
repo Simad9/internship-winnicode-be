@@ -22,7 +22,8 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 
-// Swagger Documentation Endpoint
+// Swagger Documentation Endpoints
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/", Routes);

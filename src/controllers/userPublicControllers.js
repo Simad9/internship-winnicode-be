@@ -1,3 +1,5 @@
+import * as Public from "../models/userPublicModels.js";
+
 // Halaman Dashboard
 const dashboardPublic = async (req, res) => {
   const id_user = req.userId;

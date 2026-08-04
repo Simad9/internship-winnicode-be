@@ -55,13 +55,14 @@ const login = async (req, res) => {
     // JWT Sign
     const accessToken = jwt.sign(
       { userId: data.id_user, username: username, role: data.role },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "20s" }
+      process.env.ACCESS_TOKEN_SECRET || process.env.JWT_SECRET,
+      // { expiresIn: "20s" },
+      { expiresIn: "1d" },
     );
     const refreshToken = jwt.sign(
       { userId: data.id_user, username: username, role: data.role },
-      process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "1d" }
+      process.env.REFRESH_TOKEN_SECRET || process.env.JWT_SECRET,
+      { expiresIn: "1d" },
     );
 
     // Update Refresh Token + Cookie
@@ -112,12 +113,12 @@ const refreshToken = async (req, res) => {
         const { id_user: userId, username, role } = user;
         const accessToken = jwt.sign(
           { userId, username, role },
-          process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: "20s" }
+          process.env.ACCESS_TOKEN_SECRET || process.env.JWT_SECRET,
+          { expiresIn: "20s" },
         );
 
         res.json({ accessToken });
-      }
+      },
     );
   } catch (error) {
     res.status(500).json({

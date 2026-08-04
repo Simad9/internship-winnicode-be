@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import validasiUploadImage from "../utils/validasiUploadImage.js";
+import * as User from "../models/usersModels.js";
 
 const getUsers = async (req, res) => {
   try {

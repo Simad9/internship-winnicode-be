@@ -1,23 +1,23 @@
 ###
 # == Tidak ada Halaman == 👷‍♀️
 # Ambil Data (✅ Sukses)
-GET http://localhost:5000/api/users
+GET http://localhost:8080/api/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJ1c2VybmFtZSI6IldpamRhbjEyMyIsImVtYWlsIjoiV2lqZGFuMTIzQGdtYWlsLmNvbSIsImlhdCI6MTc0NTMyNjM5MiwiZXhwIjoxNzQ1MzI2NDEyfQ.EWkEuv2A95RX7daXLsKsaVEyKNHK4Fxf8LE4Is58DQ8
 ###
 # == Tidak ada Halaman == 👷‍♀️
 # Refresh Token (✅ Sukses)
-GET http://localhost:5000/api/token
+GET http://localhost:8080/api/token
 Content-Type: application/json
 ###
 # == Tidak ada Halaman == 👷‍♀️
 # Logout (✅ Sukses)
-DELETE http://localhost:5000/api/logout
+DELETE http://localhost:8080/api/logout
 Content-Type: application/json
 
 ###
 # == Halaman Login ==
 # Login Akun (✅ Sukses)
-POST http://localhost:5000/api/login
+POST http://localhost:8080/api/login
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 ###
 # == Halaman Register ==
 # Register Akun (✅ Sukses)
-POST http://localhost:5000/api/register
+POST http://localhost:8080/api/register
 Content-Type: application/json
 
 {
